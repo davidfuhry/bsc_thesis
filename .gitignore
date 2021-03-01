@@ -43,3 +43,6 @@ vignettes/*.pdf
 
 # HTML output of pandoc
 *.html
+
+# RDS Files
+*.RDS
