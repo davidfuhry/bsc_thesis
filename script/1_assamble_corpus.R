@@ -41,36 +41,16 @@ names(corpora) <- names(files)
 
 # Watergate.tv
 
-watergate_new <- readRDS("data/watergate_corpus.RDS")
-watergate_new$date <- watergate_new$date %>%
+watergate <- readRDS("data/watergate_corpus.RDS")
+watergate$date <- watergate$date %>%
     lubridate::dmy(locale = "German_Germany")
 
-watergate_new$site <- "Watergate.tv"
-watergate_new$author <- NA
-
-watergate_old <- readRDS("data/articles_wg.RDS")
-
-colnames(watergate_old) <- tolower(colnames(watergate_old))
-
-watergate_old <- watergate_old[!watergate_old$uri %in% watergate_new$url, ]
-
-watergate_old$category <- NA
-watergate_old$author <- NA
-
-colnames(watergate_old)[1] <- "url"
-
-watergate_old$date <- watergate_old$date %>%
-    as.integer %>%
-    as.POSIXct(origin = "1970-01-01") %>%
-    as_date
-
-watergate <- rbind(watergate_new, watergate_old)
+watergate$site <- "Watergate.tv"
+watergate$author <- NA
 
 watergate$id <- paste0("watergate_", 1:nrow(watergate))
 
 corpora$watergate <- watergate
-
-rm(list = c("watergate_old", "watergate_new", "watergate"))
 
 # Alles Schall und Rauch
 
@@ -186,4 +166,21 @@ spon$id <- paste0("spon_", 1:nrow(spon))
 
 corpora$spon <- spon
 
+## Clean some leftover duplicates
+
+corpus <- bind_rows(corpora)
+
+corpus <- corpus %>%
+    distinct(text, .keep_all = TRUE)
+
+# There are somehow 3 fr pages with different texts for the same uri.
+# We throw them out all together
+
+counts_per_uri <- data.frame(table(corpus$url))
+drop <- counts_per_uri$Var1[counts_per_uri$Freq > 1]
+
+corpus <- corpus %>%
+    filter(!url %in% drop)
+
 saveRDS(corpora, "data/corpus_full.RDS")
+saveRDS(corpus, "data/corpus.RDS")

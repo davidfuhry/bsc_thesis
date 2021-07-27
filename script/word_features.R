@@ -32,7 +32,7 @@ word_counts %<>% filter(total > 500) %>%
     filter(lemma != "-") %>%
     filter(lemma != "dass") %>%
     arrange(desc(total)) %>%
-    slice(1:300)
+    slice(1:400)
 
 words %<>% filter(lemma %in% word_counts$lemma)
 
@@ -48,5 +48,6 @@ word_features <- words_tf_idf %>%
 features %<>% left_join(word_features, by = c("id" = "doc_id")) %>%
     replace(is.na(.), 0)
 
+saveRDS(features, file.path(base_dir, "data", "features_word_frequencies.RDS"))
 
-rm(annotated_corpus, doc_word_counts, word_counts, word_features, words, words_tf_idf)
+rm(annotated_corpus, doc_word_counts, word_counts, word_features, words, words_tf_idf, stopwords, base_dir)

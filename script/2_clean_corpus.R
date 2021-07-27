@@ -4,9 +4,7 @@ library(stringr)
 
 base_dir <- rprojroot::find_root("README.md")
 
-corpus <- readRDS(file.path(base_dir, "data", "corpus_full.RDS"))
-
-corpus <- do.call(rbind, corpus)
+corpus <- readRDS(file.path(base_dir, "data", "corpus_unprocessed.RDS"))
 
 # Filter out texts we dont want to use
 
@@ -36,11 +34,16 @@ chars <- corpus$text %>%
 
 regex <- paste0(" (", paste(chars[chars$Freq < 1000, ]$., collapse = "|") ,")+ ")
 
+# So this happens apparently
+regex <- stringr::str_replace(regex, fixed("?"), "")
+
 corpus$text %<>% str_replace_all(emo::ji_rx, "") %>%
     str_replace_all(regex, " ") %>%
-    str_replace_all("_+", "") %>%
+    str_replace_all("_{2,}", "_") %>%
     str_replace_all("[[:space:]]+", " ") %>%
     str_trim
+
+saveRDS(corpus, file.path(base_dir, "data", "corpus.RDS"))
 
 rm(regex, chars, langs)
 gc()

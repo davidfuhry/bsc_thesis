@@ -19,11 +19,18 @@ validate <- Matrix(as.matrix(validate[, -3:-1]), sparse = TRUE)
 training <- lgb.Dataset(data = training, label = target)
 
 
+# pars = list(objective = "binary",
+#             learning_rate = 0.05,
+#             num_iterations = 10000L,
+#             max_depth = -1L,
+#             num_leaves = 127L,
+#             early_stopping_round = 10L)
+
 pars = list(objective = "binary",
             learning_rate = 0.05,
             num_iterations = 10000L,
             max_depth = -1L,
-            num_leaves = 50L,
+            num_leaves = 127L,
             early_stopping_round = 10L)
 
 lgb_test <- lgb.cv(params = pars,
@@ -46,6 +53,8 @@ set.seed(42)
 folds <- caret::createFolds(features$is_conspiracy, k = 10, list = TRUE)
 
 results <- numeric()
+
+classifications <- list()
 
 for (i in 1:10) {
     inValidate <- folds[[i]]
@@ -72,11 +81,21 @@ for (i in 1:10) {
 
     predicted <- ifelse(predicted >= cp$optimal_cutpoint, 1, 0)
 
+    cl <- dplyr::tibble(fold = i,
+                        id = features$id[inValidate],
+                        class = features$is_conspiracy[inValidate],
+                        prediction = predicted,
+                        wrong_prediction = (prediction != class))
+
+    classifications[[i]] <- cl
+
     result <- caret::confusionMatrix(as.factor(predicted), as.factor(validate_target), positive = "1")$overall
 
     results <- rbind(results, result)
 }
 
+classifications <- dplyr::bind_rows(classifications)
+caret::confusionMatrix(as.factor(classifications$prediction), as.factor(classifications$class), positive = "1")
 
 rm(inTraining, training, target, validate, pars, lgb_test, model, folds, cp, result, i, inValidate, predicted, validate_target)
 

@@ -121,5 +121,7 @@ features$average_quote_length[is.nan(features$average_quote_length)] <- 0
 features %<>% replace(is.na(.), 0) %>%
     mutate(across(!any_of(c("id", "text_length", "is_conspiracy")), ~ .x / text_length * 100))
 
+# saveRDS(features, file.path(base_dir, "data", "features_literatur.RDS"))
+
 rm(sentiments, negations, question_marks, quote_regex, quoted_text)
 gc()

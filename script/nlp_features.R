@@ -53,5 +53,7 @@ features %<>% replace(is.na(.), 0) %>%
     rename(interpunctuation = `$(`) %>%
     rename(colon = `$.`)
 
+# saveRDS(features, file.path(base_dir, "data", "features_nlp.RDS"))
+
 rm(cols_original, xpos_tags, word_count, annotated_corpus)
 gc()

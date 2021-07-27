@@ -10,6 +10,8 @@ base_dir <- rprojroot::find_root("README.md")
 
 if (!exists("corpus")) corpus <- readRDS(file.path(base_dir, "data", "corpus.RDS"))
 
+if (!exists("features")) features <- tibble(id = corpus$id, text_length = nchar(corpus$text), is_conspiracy = ifelse(corpus$site %in% c("conrebbi", "deutschlandpranger", "fm-tv", "hinterderfichte", "Watergate.tv", "Alles Schall und Rauch", "recentr"), 1, 0))
+
 data_dir <- "~/R-Projects/conspiracy/Data"
 
 config <- list(`Alles Schall und Rauch` = list(folder = "ASuR",
@@ -22,8 +24,9 @@ config <- list(`Alles Schall und Rauch` = list(folder = "ASuR",
                               content_selector = ".entry"),
                hinterderfichte = list(folder = "hinterderfichte",
                                       content_selector = ".entry-content"),
-               `Watergate.tv` = list(folder = "watergate",
-                                     content_selector = ".entry-content, .attachment-content-single"),
+               `Watergate.tv` = list(folder = "watergate_new",
+                                     content_selector = ".entry-content, .attachment-content-single",
+                                     remove_selector = ".anzeige, .anzeige-unten, .pre-spoiler, script"),
                `Frankfurter Rundschau` = list(folder = "FR",
                                               content_selector = ".lp_article_content",
                                               remove_selector = ".id-AuthorList"),
@@ -168,6 +171,8 @@ cols_original <- colnames(features)
 
 features %<>% cbind(., html_features[, -1]) %>%
     mutate(across(!any_of(cols_original), ~ .x / text_length * 100))
+
+# saveRDS(features, file.path(base_dir, "data", "features_html.RDS"))
 
 rm(cl, config, html_features, rows, base_dir, cols_original, data_dir, extract_html_features)
 gc()
