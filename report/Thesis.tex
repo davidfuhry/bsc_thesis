@@ -1,0 +1,87 @@
+% !TeX program = xelatex
+% !BIB program = biber
+
+\documentclass{svproc}
+
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{placeins}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{todonotes}
+\usepackage{booktabs}
+\usepackage[english, german, ngerman]{babel}
+\usepackage[
+    backend=biber,
+    style=apa,
+    autocite=inline,
+    mincitenames=1,
+    maxcitenames=2
+]{biblatex}
+
+\addbibresource{thesis-literature.bib}
+\addbibresource{thesis-software.bib}
+\addbibresource{thesis-online.bib}
+
+
+
+\selectlanguage{ngerman}
+
+\def\UrlFont{\rmfamily}
+
+\begin{document}
+\mainmatter              % start of a contribution
+%
+\title{Standortbestimmung mittels ADS-B Sensordaten und maschninellem Lernen}
+%
+\titlerunning{Standortbestimmung mittels maschinellem Lernen}  % abbreviated title (for running head)
+%                                     also used for the TOC unless
+%                                     \toctitle is used
+%
+\author{David Fuhry\inst{1}}
+%
+\authorrunning{Fuhry} % abbreviated author list (for running head)
+%
+%%%% list of authors for the TOC (use if author list has to be modified)
+\tocauthor{David Fuhry}
+%
+\institute{Universität Leipzig\\Machine Learning Group\\Leipzig, Germany\\
+\email{df15nocu@studserv.uni-leipzig.de}}
+%
+\maketitle              % typeset the title of the contribution
+%
+\begin{abstract}
+    Es wird ein Verfahren vorgestellt um mit ADS-B Sensordaten den Breitengrad eines Flugzeugstandortes zu ermitteln. Zum Einsatz kommen Regressionsverfahren des maschinellen Lernens. Der Breitengrad kann mit einer mittleren Genauigkeit von unter 20km bestimmt werden. Für eine produktive Anwendung in der Luftraumüberwachung müssen die eingesetzten Verfahren weiter optimiert werden.
+    \keywords{Maschinelles Lernen, ADS-B, Regression, Positionsbestimmung}
+\end{abstract}
+%
+
+\newpage
+
+% Introduction
+
+\include{content/introduction}
+
+% Theorie
+
+\include{content/theorie}
+
+% Vorgehen
+
+\include{content/vorgehen}
+
+% Umsetzung
+
+\include{content/umsetzung}
+
+%
+% ---- Bibliography ----
+%
+%
+\printbibliography[title=Literatur, keyword=literature]
+\printbibliography[title=Software, keyword=software]
+\printbibliography[title=Software, keyword=online]
+
+\end{document}
