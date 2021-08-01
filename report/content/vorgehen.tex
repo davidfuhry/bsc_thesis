@@ -1,0 +1,17 @@
+\section{Vorgehen}
+
+Der Arbeit zugrunde liegt ein Korpus aus Texten von Internetportalen, die der verschwörungstheoretischen, bzw. Truther Szene zuzuordnen sind.
+Diese wurde im Verlauf der letzten Jahre über Webcrawling zusammengestellt.
+\todo{Füllmüll?}Eine genauere Beschreibung der Zusammensetzung des Korpuses wird im weiteren Verlauf dieser Arbeit erfolgen.
+
+Um einen strukturierte Analyse mit Methoden des maschinellen Lernenes zu ermögölichen wird zunächst ein Vergleichskorpus mit Artikeln die von Form und Thematik möglich ähnlich den betrachteten, verschwörungstheoretischen Texten gelagert sind ohne aber die konspirativen Aspekte zu teilen.
+
+Anschließend werden die kombinierten Korpora gereining und mit Verfahren aus der natürlichen Sprachverarbeitung Features extrahiert auf denen klassifizierungsverfahren arbeiten können.
+Zum Einsatz kommen sollen dabei sowohl Features die klassischerweise für Textklassifikation herangezogen werden, wie etwa Wortfrequenzen, POS-Tags und Wortdichte \todo{Zitieren}[CITATION NEEDED] als auch Features die auf den Erkentnissen qualitativer Forschung zu Verschwörungstheorien basieren.
+
+Die häufig angesprochene Emotionalität (oder der Mangel an selbiger) [citations needed]\todo{zitieren} von verschwörungstheoretischen Texten etwa soll durch eine Sentiment-Analyse betrachtet werden.
+Die häufig angesprochene Multimedialität/Fragmentiertheit von verschwörungstheretischen Inhalten soll durch Analyse der eingebetteten Inhalte wie Bilder, Tweets und YouTube Videos aber auch über die Menge der Verlinkungen untersucht werden.
+
+Mit den so erstellten Daten soll abschließend ein Modell trainiert werden, dass zwischen den verschwörungstheoretischen Texten und dem Vergleichskorpus unterscheiden kann.
+Zum Einsatz kommen soll dazu \textit{LightGBM} \parencite[][]{lightgbm} eine Implementierung von Gradient Boosting Descision Trees [citation needed].
+Dieses Verfahren bietet neben der relativ guten Präzision den Vorteil, dass die Ergebnisse ähnlich einfachen Entscheidungsbäumen verhältnismäßig gut interpretierbar sind, so lässt sich gut der Einfluss einzelner Features auf die Klassifizierung abschätzen.

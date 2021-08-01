@@ -26,7 +26,7 @@ Es besteht weiterhin ein negativer Zusammenhang zwischen der Artikellänge und d
 
 \begin{table}
     \begin{center}
-        \begin{tabular}[t]{llllll}
+        \begin{tabularx}{\textwidth}{lXXXXX}
             \toprule
             & Von & Bis & Mittlere Zeichenzahl & Anzahl Artikel & Artikel/Monat\\
             \midrule
@@ -39,7 +39,7 @@ Es besteht weiterhin ein negativer Zusammenhang zwischen der Artikellänge und d
             recentr & 03.08.2007 & 05.08.2020 & 5071 & 4762 & 30.5\\
             Watergate.tv & 20.05.2016 & 16.11.2020 & 2810 & 5403 & 101.9\\
             \bottomrule
-            \end{tabular}
+            \end{tabularx}
         \caption{Kennzahlen der einzelnen Quellen des Korpuses}
         \label{corpus-stats}
     \end{center}
@@ -82,3 +82,43 @@ In die öffentlichkeit Rückte das Portal als sich das Neo-Magazin-Royale wegen 
 \todo{Kurzes Fazit Korpus}
 
 % Vergleichskorpus
+
+Bei der Erstellung des Vergleichskorpus war es das Ziel Quellen zu wählen die dem Korpus konspirativer Texte möglichst ähnlich sind, ohne die konspirativen Aspekte zu enthalten.
+Da insbesondere die letzten beiden besprochenen Angebote sich inhaltlich sehr an journalisitsche Angebote anlehnen, lag es nah ebensolche heranzuziehen.
+Aus Gründen der Vollständigkeit (Die Angebote sollten möglichst den kompletten Zeitraum des Korpuses abdecken) sowie der Zugänglichkeit wurden die Angebote von Spiegel Online sowie der Frankfurter Rundschau ausgewählt.
+Es wurde für beide Onlineangebote zunächst ein Index aller Artikel die in den selben Zeitraum wie der Korpus fallen erstellt und aus diesem zufällig eine Auswahl von 10000 Artikeln pro Anbieter gezogen.
+
+Die restlichen im Korpus enthaltenen Seiten sind alle mehr oder weniger in Blogform gehalten.
+Um Inhalte in einer vergleichbaren Form zu findne aber auch dem in der Literatur häufig anzutreffenden Feststellungen der wissenschaftlichen Form von verschwörungstheoretischen Texten Rechnung zu tragen wurde eine Reihe von Wissenschaftsblogs als zweite Komponente im Vergleichskorpus gewählt.
+Dafür wurden von den beiden Platformen scienceblogs und scilogs\footnote{Beide Platformen sind Anbieter bei denen eine Vielzahl verschiedener Blogs zu finden sind.} ähnlich den journalistischen Angeboten aus dem gesamten Index der Einträge eine Auswahl von jeweils 10000 Artikeln ausgewählt.
+Genauere Kennwerte zum Vergleichskorpus siehe in Tabelle \ref{comcorpus-stats}.
+
+\begin{table}
+    \begin{center}
+        \begin{tabularx}{\textwidth}{XXXXXX}
+            \toprule
+            & Von & Bis & Mittlere Zeichenzahl & Anzahl Artikel & Artikel/Monat\\
+            \midrule
+            Frankfurter Rundschau & 03.08.2006 & 04.08.2020 & 3670 & 9959 & 59.3\\
+            scienceblogs & 14.02.2007 & 04.08.2020 & 3261 & 8765 & 54.4\\
+            scilogs & 29.12.2000 & 03.08.2020 & 5206 & 9533 & 40.6\\
+            Spiegel Online & 01.08.2006 & 07.01.2020 & 4687 & 8665 & 53.8\\
+            \bottomrule
+        \end{tabularx}
+        \caption{Kennzahlen der einzelnen Quellen des Vergleiskorpuses}
+        \label{comcorpus-stats}
+    \end{center}
+\end{table}
+
+\subsection{Datenvorverarbeitung}
+
+Zunächst wurden einige Säuberungsschritte auf den Korpus angewendet, um zu verhindern, dass fehlerhafte oder irrelevante Daten mit für die Feature Erstellung herangezogen werden.
+
+Es wurde zunächst Unicode Normalisierung für alle Texte durchgeführt, anschließend wurden mittels des \textit{Google Compact Language Detector 3} \parencite[][]{cld3} die Sprache aller Text bestimmt nur (überwiegend) deutschsprachige Texte zu betrachten.
+Da im Korpus an einigen Stellen noch nicht zum Artikeltext gehörige Komponenten aus vielen Sonderzeichen vorhanden waren, wurden alle Wörter entfernt, die nur aus Zeichen bestanden, die unter 1000 Mal im gesammten Korpus vorkamen.
+Schlussendlich wurden noch kleinere Korrekturen vorgenommen, wie das Zusammenfassen multipler, aufeinanderfolgender Leerzeichen und Unterstriche (die gerne als Trennlinien in den Text benutzt wurden).
+
+Schlussendlich wurden noch alle Text unter 100 Zeichen länge aus dem Korpus entfernt, da diese für die Klassifizierungsaufgabe nur wenig Informationen enthalten können. Der finale Korpus umfasste 53758 Texte, mit einem Anteil der positiven Klasse (sprich von verschwörungstheoretischen Texten) von etwa 32\%.
+
+\subsection{Feature Erstellung}
+
