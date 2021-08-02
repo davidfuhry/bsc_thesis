@@ -1,0 +1,153 @@
+---
+title: "Aktueller Stand"
+author: "David Fuhry"
+date: "24/02/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Korpus
+
+Der verwendete Korpus enthält Texte von sieben als konspirativ zu betrachtenden Websites sowie als Vergleichsdatensatz von je zwei journalistischen bzw. wissenschaftsjournalistischen Quellen.
+
+Er setzt sich wie folgt zusammen:
+
+```{r corpus_run, echo = FALSE, message = FALSE}
+ library(tidyverse)
+
+base_dir <- rprojroot::find_root("README.md")
+
+corpus <- readRDS(file.path(base_dir, "data", "corpus.RDS"))
+
+corpus %>%
+    mutate(dataset = ifelse(site %in% c("conrebbi", "deutschlandpranger", "fm-tv", "hinterderfichte", "Watergate.tv", "Alles Schall und Rauch", "recentr"), "conspiracy", "control")) %>%
+    mutate(nchar = nchar(text)) %>%
+    group_by(site, dataset) %>%
+    summarise(n = n(), mean_nchar = round(mean(nchar))) %>%
+    knitr::kable(booktabs = T)
+```
+
+Die Verteilung in Bezug auf die Zielklasse ist mit etwa 1:2 nicht unbedingt super, aber sollte wohl passen.
+
+Das Bereinigen ist aktuell relativ simpel gehalten, ich filtere u.a.:
+
+* Nicht deutschsprachige Texte
+* Sehr kurze Texte
+* Wörter die komplett aus sehr selten vorkommenden Sonderzeichen bestehen
+    * Hier sind wohl meist eher Fehler bei der Extraktion aus HTML Schuld
+* Kleineres wie unterschiedliche Whitespaces, horizontale Linien, Unicode normalisierung, etc.
+
+Ich filtere aktuell nicht auf Wortebene Stopwords o.ä., da die Features alle eher Stilbasiert sind.
+
+## Model mit Features aus der Literatur
+
+Für ein erstes Modell habe ich nur Merkmale die in der qualitativen Literatur zu finden waren herangezogen, diese sind:
+
+* Sentimentwerte
+    * Als Summe, absolute Summe, Summe positiver Werte und Summe negativer Sentimente
+* Zahl der Fragezeichen
+* Zahl der Anführungszeichen
+* Zahl von 'scare quotes', definiert als einzelnes Wort in Anführungszeichen#
+* Durchschnitliche Länge von Zitaten
+    * Nur Top-Level Zitate
+* Anteil von Zitaten am Gesamttext
+* Anzahl von Zahlenangaben
+* Anzahl von Negationswörtern
+
+Es gibt noch ein paar in der Literatur genannte Eigenschaften von denen ich denke, dass sie prinzipiell automatisiert auswertbar wären, aber bei denen ich keine gute Lösung finden konte. So etwa die Anzahl von Modalwörtern, die Anzahl von passiven Verben und die Anzahl von Einheitenbezeichnungen.
+
+Für die Sentimentanalyse nutze ich SentiWS mit Matching über Lemma und POS-Tags, die wiederrum aus Annotation mit spacy stammen. Alle Features wurden mit der Textlänge skaliert.
+
+```{r build_model, eval = FALSE}
+library(lightgbm)
+
+set.seed(42)
+
+inTraining <- as.vector(caret::createDataPartition(features$is_conspiracy, p = .66, list = FALSE))
+training <- features[inTraining,]
+validate  <- features[-inTraining,]
+
+target <- training$is_conspiracy
+training <- Matrix::Matrix(as.matrix(training[, -3:-1]), sparse = TRUE)
+
+validate_target <- validate$is_conspiracy
+validate <- Matrix::Matrix(as.matrix(validate[, -3:-1]), sparse = TRUE)
+
+training <- lgb.Dataset(data = training, label = target)
+
+pars = list(objective = "binary",
+            learning_rate = 0.05,
+            num_iterations = 10000L,
+            max_depth = -1L,
+            num_leaves = 50L,
+            early_stopping_round = 10L)
+
+lgb_test <- lgb.cv(params = pars,
+                   data = training,
+                   nfold = 10L)
+
+pars$num_iterations <- round(lgb_test$best_iter + (lgb_test$best_iter / 10))
+
+model <- lightgbm(data = training,
+                  params = pars)
+
+predicted <- predict(model, data = validate)
+```
+
+```{r load_model_results, include = FALSE}
+predicted <- readRDS(file.path(base_dir, "data", "predictions.RDS"))
+validate_target <- readRDS(file.path(base_dir, "data", "acutal.RDS"))
+```
+
+Das entstehende Model ist dann so irgendwie mittelgut, hier anhand der ROC-Kurve:
+
+```{r roc_curve, echo = FALSE, message=FALSE, warning = FALSE}
+library(cutpointr)
+
+cp <- cutpointr(predicted, validate_target)
+
+plot(cp)
+
+```
+
+Sowie der confusion Matrix:
+
+```{r confusion_matrix, echo = FALSE}
+
+predicted <- ifelse(predicted >= cp$optimal_cutpoint, 1, 0)
+
+caret::confusionMatrix(as.factor(predicted), as.factor(validate_target), positive = "1")
+```
+
+
+## Erweitertes Modell
+
+Für ein erweitertes Modell habe ich dann noch einige Features hinzugenommen:
+
+* POS Tags
+* Anteil von Sonderzeichen
+* Anteil der Großbuchstaben
+* Durchschnittliche Wortlänge
+
+Das Modell wurde dann mit den gleichen Parametern trainiert wie das erste (Hyperparameter tuning steht noch an) und liefert deutlich bessere Ergebnisse:
+
+```{r roc_curve_2, echo = FALSE, message=FALSE, warning = FALSE}
+predicted <- readRDS(file.path(base_dir, "data", "predictions_2.RDS"))
+validate_target <- readRDS(file.path(base_dir, "data", "acutal_2.RDS"))
+
+cp <- cutpointr(predicted, validate_target)
+
+plot(cp)
+
+```
+
+
+```{r confusion_matrix_2, echo = FALSE}
+
+predicted <- ifelse(predicted >= cp$optimal_cutpoint, 1, 0)
+
+caret::confusionMatrix(as.factor(predicted), as.factor(validate_target), positive = "1")
+```

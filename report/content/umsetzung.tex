@@ -120,5 +120,51 @@ Schlussendlich wurden noch kleinere Korrekturen vorgenommen, wie das Zusammenfas
 
 Schlussendlich wurden noch alle Text unter 100 Zeichen länge aus dem Korpus entfernt, da diese für die Klassifizierungsaufgabe nur wenig Informationen enthalten können. Der finale Korpus umfasste 53758 Texte, mit einem Anteil der positiven Klasse (sprich von verschwörungstheoretischen Texten) von etwa 32\%.
 
-\subsection{Feature Erstellung}
+\subsection{Features}
 
+Basierend auf den Erkenntnissen der bisherigen Forschung zu verschwörungstheoretischen Texten wurden Features für die verwendeten Klassifikationsverfahren erstellt.
+Während in der Forschung kein klarer Konsens besteht ob Verschwörungstheorien besonders emotional [CITATION NEEDED] oder besonders sachlich [CITATION NEEDED] Argumentieren, scheint die Emotionalität allgemein ein wichtiger Aspekt zu sein.
+\todo{Zitation allgemein sentimentanalyse}Um dies zu operationalisieren wurden das Sentimentwörterbuch \textit{SentiWS} \parencite[][]{sentiws} genutzt.
+Dieses umfasst positive und negative Sentimentwerte für über 3000 Grundformen deutscher Wörter.
+Wärend komplexere Ansätze wie etwa der von \autocite*[]{ml_sentiment} eine höhere Präzision versprechen,\footnote{So ist der hier vorgestellte Ansatz nicht in der Lage mit negationen umzugehen.} scheint die genutzte Methode für den vorliegenden Kontext ausreichende Ergebnisse zu lieferen.
+Es wurde die Summe der positiven und negativen Sentimente erfasst, also auch die Gesammtsumme sowie der Betrag nach Text.
+Hiermit soll insbesondere auf solche Fälle eingegangen werden, in denen ein Text zwar viele emotional behaftete Wörter verwendet, sich die Sentimentsumme aber durch einen Wechsel an positiven und negativen Wörtern ausgleicht.
+
+Ein weiteres Merkmal das in der Literatur häufig anzutreffen ist [CITATION NEEDED] ist die hohe Menge an Zitaten.
+Um diese nutzen zu können wurden zum einen die Anzahl der Anführungszeichen im Text gezählt.
+Eine genauere Betrachtung wird ermöglicht da auch die Zahl der Zitationen ohne Zitate im Zitat sowie die durchschnittliche Länge von Zitaten und deren Anteil am Gesamttext erfasst wird.
+Ebenfalls wird die Anzahl an Scare-Quotes erfasst, wobei Scare-Quotes hier definiert sind als ein Zitat in dem keine Leerzeichen enthalten sind.
+
+Die häufig anzutreffende Beobachtung, dass Verschwörungstheoretische Texte häufig viele Fragen stellen [CITATION NEEDED] wird durch ein simples Zählen der Fragezeichen abgedeckt.
+Ähnlich lässt sich auch die Annahme über die Häufung von Zahlenangaben [CITATION NEEDED] durch einfaches Zählen von Zahlengruppen abbilden.
+Ebenfalls wird in der Literatur davon gesprochen, dass verschwörungstheoretische Texte häufig negationen verwenden.
+Um dies Informationen nutzbar zu machen wurde händisch eine Liste von 15 Negationswörtern erstellt und deren Häufigkeit in den Texten gemessen.
+Alle Features wurden mit der Textlänge skaliert.
+
+Ein weitere Häufig anzutreffende Beobachtung zu Verschwörungstheoretischen Texten spezifisch im Internet ist deren Multimedialität sowie deren Verknüpftheit untereinander. [CITATIONS NEEDED EN MASSE]
+Um diese Eigenschaften abzubilden wurden eine Reihe von Informationen aus den Hypertext Dateien extrahiert aus denen die Texte stammen.
+Um die Multimedialität zu erfassen wurde die Anzahl der eingebundenen Bilder, Tweets, Youtube-Videos sowie anderer eingebetteter Elemente im Artikel gezählt.
+Die Verknüpftheit wurde über die Anzahl von Links im Artikel, aufgeteilt nach internen und externen Links, erfasst.
+Ebenso wurde die Menge an fettgedruckten und kursiven Text erfasst.
+
+Um neben den in der Literatur zu findenden Merkmalen auch eine weitergehende Untersuchung der Texte zu ermöglichen wurden weiterhin auch Features die häufig im Bereich der Textklassifikation genutzt werden mit einbezogen.
+Dazu wurde der Corpus zunächst mithilfe von \textit{spaCy} \parencite[][]{spacy} annotiert.
+Es wurden anschließend der Anteil jedes Part-of-Speech Tags als Feature übernommen, sowie der Anteil an großgeschriebenen Text und Sonderzeichen.
+Ebenso wurde die Wortdichte für jeden Text bestimmt, also die Anzahl an Wörtern im Verhältniss zur Textlänge.
+Zur ermittlung von Wortfrequenzen wurden zunächst Stopwörter aus dem Corpus gefiltert\footnote{Zum Einsatz kam die Stopwort Liste aus dem \textit{tm} Paket \parencite[][]{r-tm}}, die Wörter auf die Lemmata reduziert, einige Sonderfälle aussortiert\footnote{So wurde beispielsweise das Wort dpa nicht übernommen, da es praktisch exklusiv in Artikeln von Frankfurter Rundschau und Spiegel Online vorkommt.} und anschließend die 400 häufigsten Wörter als Features übernommen.
+
+\subsection{Modelerstellung}
+
+Für die Modellerstellung kam die LightGBM \parencite[][]{lightgbm} Bibliothek zum Einsatz. Zum Hyperparamethertuning wurde ein bayesscher Optimierer aus dem Paket \textit{ParBayesianOptimization} \parencite{bayes} genutzt.
+
+Zunächst wurde ein Model erstellt, dass sich auf Features die auf in der Literatur zu findenden Beobachtungen basieren.
+Dafür wurde ein Train/Validate Split im Verhältniss 2:1 vorgenommen.
+Auf den Trainingsdaten wurde mittels in lightgbm vorhandener Funktionalität über eine 10-Fold Kreuzvalidierung die optimale Anzahl an Booster Iterationen ermittelt um ein Overfitting der Daten zu verhindern, welches eines der Hauptprobleme bei Gradientenbossting Methoden ist.
+Das anschließend mit dieser Bassis trainierte Model erreichte auf dem Validation Set eine Präzision von 78.5\%. [NEEDED: MEHR DATEN]
+
+[HERE BE HYPERPARAMTER TABLE]
+
+Anschließend wurde ein Modell mit allen 462 Features erstellt.
+Hier wurde ebenfalls mittels Kreuzvalidierung die optimale Iterationstiefe bestimmt, die Validierung des anschließend erstellten Modells erfolgte aber mittels einer 10-Fachen Kreuzvalidierung auf den gesammten Trainingsdaten.
+Die dafür verwendeten Parameter sind Tabelle [TABELLE] zu entnehmen.
+Das so trainierte Modell erreichte eine Präzision von 97.86\%.

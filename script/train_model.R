@@ -2,6 +2,10 @@ library(Matrix)
 library(caret)
 library(lightgbm)
 
+features <- merge(features_html, features_literatur)
+features <- merge(features, features_nlp)
+features <- merge(features, features_word_frequencies)
+
 set.seed(42)
 
 inTraining <- as.vector(createDataPartition(features$is_conspiracy, p = .66, list = FALSE))
@@ -93,6 +97,8 @@ for (i in 1:10) {
 
     results <- rbind(results, result)
 }
+
+
 
 classifications <- dplyr::bind_rows(classifications)
 caret::confusionMatrix(as.factor(classifications$prediction), as.factor(classifications$class), positive = "1")
