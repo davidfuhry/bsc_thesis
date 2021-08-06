@@ -1,9 +1,52 @@
 \section{Theorie}
 
-% Allgemein Verschwörungstheorien, Stand der Forschung etc
+% Forschungsstand, Methoden zur Identifizierung
+
+\subsection{Stand der Forschung}
+
+Der Beginn der Wissenschaftlichen auseinandersetzung mit Verschwörungstheorien wird üblicherweise rund um das Erscheinen von Richard \textcite{hofstadter_2008} Essay \textit{The Paranoid Style in American Politics} verortet.
+In diesem setzt Hofstadter sich mit dem was er für von Verschwörungstheorien beeinflusste Politik in den USA hält, wie etwa die Schriften von Senator McCarthy und die nach ihm benannte Praxis des McCarthyismus \todo{Maybe citation needed}.
+
+Das weitere Forschungsinteresse im restlichen 20. Jahrhundert hielt sich in Grenzen, die Verbleibende Forschung fiel meist in eine von Zwei Kategorien, wie \textcite{sunstein_2008} passend zusammenfassen:
+
+\begin{quotation}
+    The academic literature on conspiracy theories is thin, and most of it falls into one 
+    of two classes: (1) work by analytic philosophers, especially in epistemology and the 
+    philosophy of science, that asks what counts as a “conspiracy theory” and whether such theories are methodologically suspect; (2) a smattering of work in sociology and Freudian psychology on the causes of conspiracy theorizing. \parencite[][2]{sunstein_2008}
+\end{quotation}
+
+In der jüngeren Vergangenheit haben vor allem Drei Entwicklungen Verschwörungstheorien oder zumindest deren Sichtbarkeit und damit auch der Forschung in diesem Bereich vorschub geleistet.
+
+Dies wäre zum einen die Verbreitung des Internets um die Jahrtausendwende.
+Die Mehrheit der Autoren sieht hier darin ein erhebliches Hilfsmittel für die Verbreitung von Verschwörungstheorien, wie etwa \textcite{stano_2020} schreibt: "[...] The Internet, and in particular social networks, have proved fundamental to the spread and development of such [conspiracy] theories" \parencite[][492]{stano_2020}.\footnote{Es gilt jedoch anzumerken, dass auch die gegenteile Auffassung in der Literatur vertreten ist, so etwa bei \textcite{clarke_2007}.}
+
+In der jüngsten Vergangenheit haben besonders die Wahl Donald Trumps zum US-Präsidenten 2016 und die aktuelle COVID-19 Pandemie Verschwörungstheorien ins öffentliche Interesse gerückt.
+Wärend die wissenschaftliche Aufarbeitung insbesondere von letzterer noch am Anfang steht, sind hier bereits erste Arbeiten vorhanden die neue Ansätze zeigen, wie etwa die von \textcite{shahsavari_2020}.
+
+Eines der Kernprobleme der Forschungs zu Verschwörungstheorien, ist die Frage wie Verschwörungstheorien als solche zu identifizieren sind.
+Diese Frage hat nicht nur eine fundamentale Rolle für theoretische Arbeiten zu Verschwörungstheorien, sondern ist auch von immenser praktischer Relevanz in einer Zeit in der in sozialen Medien die Grenzen zwischen Nachrichten, Verschwörungstheorien und Fake-News immer schwerer auszumachen sind.\todo{Eventuell google algorithmus zitieren}
+
+In der Vergangenheit war die wissenschaftliche Beantwortung dieser Frage meist eng mit der Frage danach verbunden was eine Verschwörungstheorie ausmacht und anhand welcher kriterien sich dies bestimmen lässt.
+Eine Beispielhafte Arbeit ist hier \textcite{uscinski_2014}.
+Die Autoren nutzen darin 6 verschiedene Tests um Verschwörungstheorien zu identifizieren, als Beispiel sei Occamm`s Razor, also die Frage nach der einfachsten Erklärung, und die falsifizierbarkeit einer Theorie genannt.
+Die Autoren selbst werten mit diesen Krieterien und der Methode der Inhaltsanalyse sowie einer Vielzahl von studentischen Kodierer:Innen einen Korpus an Briefen an US-Redaktionen aus \parencite[54ff]{uscinski_2014}.
+Während die Autoren überzeugend dafür argumentieren, alle der aufgestellten Kriterien für eine Klassifizerung einzusetzten \parencite[52f]{uscinski_2014}, ist keines der eingeführten Kriterien, zumindest mit den aktuellen technischen möglichkeiten, wirklich geeignet um automatisierte Klassifikationen vorzunehmen.
+
+Demgegenüber sind in jüngster Vergangenheit erste Arbeiten entstanden, die sich mit automatisieren Verfahren zum Erkennen von Verschwörungstheorien beschäftigen.
+Hier ist vor allem die Arbeit von \textcite{samory_2018} hervorzuheben, in der die Autor:Innen automatisiert Triplets aus \textit{agent}, \textit{action} und \textit{target} aus Verschwörungstheoretischen Online Beiträgen extrahieren.
+Als Datengrundlage nutzen sie dazu Beiträge aus dem Reddit Subforum r/conspiracy.
+Diese Werten sie mittels einer NLP Pipeline aus die unter anderem Topic Modeling, Dependency Parser und Wordvektoren nutzt, aber auch vereinzelt Expertenwissen einbringt \parencite[][6ff]{samory_2018}.
+Der Ansatz stellt einen wichtigen Beitrag zu einer vollständig automatisierten Analyse dar, ist aber auch verhältnismäßig komplex und basiert auf einer Datenbasis die nicht notwendigerweise Repräsentativ für "wild" vertretene Verschwörungstheorien ist, so dass die Übertragbarkeit für einen Identifizierungsmechanismus fragwürdig scheint.
+
+Eine weitere Arbeit die sich mit automatisierten Auswertungen beschäftigt, ist die von \textcite{shahsavari_2020}.
+Die Autor:innen werten dabei Online Diskussionen in Foren wie Reddit und 4Chan aus, die sich mit der Covid 19 Pandemie beschäftigen.
+Die Auswahl ob Diskussionen verschwörungstheoretische Inhalte enthalten oder nicht, wurde dabei von einem Expertengremium getroffen \parencite[284f]{shahsavari_2020}.
+Es werden mittels Methoden aus der Natürlichen Sprachverarbeitung narrative Netzwerke ausgewertet und so Verbindungen zu den inhalten von Nachrichten und den aktuell "beliebtesten" Verschwörungstheorien aufgezeigt. \todo{Hier eventuell mehr/besser belegen/recherchieren}
+Während auch diese Arbeit zweifelsfrei einen wichtigen Beitrag zu einem besseren Verständnis insbesondere der Verbreitung von Verschwörungstheorien in sozialen Netzwerken darstellt, wird das Problem der identifizierung von Verschwörungstheorien damit nicht wirklich gelöst.
 
 \subsection{Merkmale von verschwörungstheoretischen Texten}
 
+Um ebendiese Aufgabe angehen zu können, soll zunächst ein Blick in die Literatur erfolgen und in die in der qualitativen und quantitativen Forschung gemachten Beobachtungen zu sprachlichen Merkmalen von Verschwörungstheorien.
 Eine erschöpfende Auflistung aller in der Literatur zu findenden sprachlichen Merkmale von Verschwörungstheorien ist insbesondere mit dem erstarkten Forschungsinteresse in der jüngsten Vergangenheit kaum möglich noch wäre es zielführend.
 Es sollen daher hier vor allem solche Merkmale genannt werden, die sich für eine quantitative Erfassung eignen und in dieser Arbeit 
 
@@ -40,3 +83,7 @@ Schlussendlich findet sich bei \textcite[149]{stumpf_2019} noch die Feststellung
 % Vokabular:
 %  - Entlarfungsvokabular \parencite[][51]{ebling_2013}
 %  - Stumpf/Römer 2019 haben viel Vokabular
+
+\subsection{Textklassifizierung}
+
+% Hier über klassische Ansätze für Textklassifizierung etc.
