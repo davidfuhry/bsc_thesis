@@ -2,17 +2,9 @@ library(Matrix)
 library(caret)
 library(lightgbm)
 
-# Set to false to only train on features based on literature
-full_model <- TRUE
-
-
 features <- merge(features_html, features_literatur)
-
-if (full_model) {
-    features <- merge(features, features_nlp)
-    features <- merge(features, features_word_frequencies)
-}
-
+features <- merge(features, features_nlp)
+features <- merge(features, features_word_frequencies)
 
 set.seed(42)
 
@@ -20,21 +12,7 @@ inTraining <- as.vector(createDataPartition(features$is_conspiracy, p = .66, lis
 training <- features[inTraining,]
 validate  <- features[-inTraining,]
 
-# Baseline decision tree
-
-tree <- rpart::rpart(is_conspiracy ~ ., data = training[, -2:-1], method = "class")
-predictions <- predict(tree, validate[, -2:-1])
-
-cp <- cutpointr::cutpointr(predictions[,2], validate$is_conspiracy)
-
-predicted <- ifelse(predictions[,2] >= cp$optimal_cutpoint, 1, 0)
-
-
-caret::confusionMatrix(as.factor(predicted), as.factor(validate$is_conspiracy), positive = "1")
-
-
 # LightGBM
-
 
 target <- training$is_conspiracy
 training <- Matrix(as.matrix(training[, -3:-1]), sparse = TRUE)
@@ -52,11 +30,48 @@ training <- lgb.Dataset(data = training, label = target)
 #             num_leaves = 127L,
 #             early_stopping_round = 10L)
 
+tuneGrid <- expand.grid(learning_rate = c(0.01, 0.05, 0.1, 0.2), num_leaves = c(5, 50, 127, 200))
+
+tuneGrid$acc <- rep(0, nrow(tuneGrid))
+
+results <- numeric()
+
+for (i in 2:nrow(tuneGrid)) {
+    pars = list(objective = "binary",
+                learning_rate = tuneGrid$learning_rate[i],
+                num_iterations = 10000L,
+                max_depth = -1L,
+                num_leaves = tuneGrid$num_leaves[i],
+                early_stopping_round = 10L)
+
+    lgb_test <- lgb.cv(params = pars,
+                       data = training,
+                       nfold = 10L)
+
+    pars$num_iterations <- round(lgb_test$best_iter + (lgb_test$best_iter / 10))
+
+    booster <- lightgbm(data = training, params = pars)
+
+    predicted <- predict(booster, data = validate)
+
+    cp <- cutpointr::cutpointr(predicted, validate_target)
+
+    predicted <- ifelse(predicted >= cp$optimal_cutpoint, 1, 0)
+
+    result <- caret::confusionMatrix(as.factor(predicted), as.factor(validate_target), positive = "1")$overall
+
+    results <- rbind(results, result)
+
+    tuneGrid$acc[i] <- result[1]
+
+    saveRDS(tuneGrid, "tuneGRID.RDS")
+}
+
 pars = list(objective = "binary",
             learning_rate = 0.05,
             num_iterations = 10000L,
             max_depth = -1L,
-            num_leaves = 50,
+            num_leaves = 127L,
             early_stopping_round = 10L)
 
 lgb_test <- lgb.cv(params = pars,
@@ -64,32 +79,6 @@ lgb_test <- lgb.cv(params = pars,
                    nfold = 10L)
 
 pars$num_iterations <- round(lgb_test$best_iter + (lgb_test$best_iter / 10))
-
-
-if (!full_model) {
-    model <- lightgbm(data = training,
-                      params = pars)
-
-    predicted <- predict(model, data = validate)
-
-    cp <- cutpointr::cutpointr(predicted, validate_target)
-
-    predicted <- ifelse(predicted >= cp$optimal_cutpoint, 1, 0)
-
-    cl <- dplyr::tibble(fold = i,
-                        id = features$id[inValidate],
-                        class = features$is_conspiracy[inValidate],
-                        prediction = predicted,
-                        wrong_prediction = (prediction != class))
-
-    classifications[[i]] <- cl
-
-    result <- caret::confusionMatrix(as.factor(predicted), as.factor(validate_target), positive = "1")$overall
-
-    results <- rbind(results, result)
-    quit()
-}
-
 
 # model <- lightgbm(data = training,
 #                   params = pars)

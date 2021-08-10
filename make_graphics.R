@@ -48,6 +48,9 @@ stats <- stats[-1, ]
 
 kableExtra::kbl(t(stats), format = "latex", booktabs = TRUE)
 
+### Table for features
+
+
 
 #### Frequency plot of publishing dates for conspiracy articles
 

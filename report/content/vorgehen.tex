@@ -1,17 +1,18 @@
 \section{Vorgehen}
 
-Der Arbeit zugrunde liegt ein Korpus aus Texten von Internetportalen, die der verschwörungstheoretischen, bzw. Truther Szene zuzuordnen sind.
+Als Grundlage dieser Arbeit dient ein Korpus aus Texten von deutschsprachigen Internetportalen, die der verschwörungstheoretischen, bzw. Truther Szene zuzuordnen sind.
 Diese wurde im Verlauf der letzten Jahre über Webcrawling zusammengestellt.
-\todo{Füllmüll?}Eine genauere Beschreibung der Zusammensetzung des Korpuses wird im weiteren Verlauf dieser Arbeit erfolgen.
 
-Um einen strukturierte Analyse mit Methoden des maschinellen Lernenes zu ermögölichen wird zunächst ein Vergleichskorpus mit Artikeln die von Form und Thematik möglich ähnlich den betrachteten, verschwörungstheoretischen Texten gelagert sind ohne aber die konspirativen Aspekte zu teilen.
+Um einen strukturierte Analyse mit Methoden des maschinellen Lernens zu ermöglichen wird ein Vergleichskorpus mit Artikeln die dem Untersuchungskorpus von Form und Thematik möglich ähnlich gelagert sind, ohne aber dessen verschwörungstheoretischen Aspekte zu teilen.
 
-Anschließend werden die kombinierten Korpora gereining und mit Verfahren aus der natürlichen Sprachverarbeitung Features extrahiert auf denen klassifizierungsverfahren arbeiten können.
-Zum Einsatz kommen sollen dabei sowohl Features die klassischerweise für Textklassifikation herangezogen werden, wie etwa Wortfrequenzen, POS-Tags und Wortdichte \todo{Zitieren}[CITATION NEEDED] als auch Features die auf den Erkentnissen qualitativer Forschung zu Verschwörungstheorien basieren.
-
-Die häufig angesprochene Emotionalität (oder der Mangel an selbiger) [citations needed]\todo{zitieren} von verschwörungstheoretischen Texten etwa soll durch eine Sentiment-Analyse betrachtet werden.
-Die häufig angesprochene Multimedialität/Fragmentiertheit von verschwörungstheretischen Inhalten soll durch Analyse der eingebetteten Inhalte wie Bilder, Tweets und YouTube Videos aber auch über die Menge der Verlinkungen untersucht werden.
+Anschließend werden die Korpora gereinigt und mit Verfahren aus der natürlichen Sprachverarbeitung Features extrahiert auf denen Klassifizierungsverfahren arbeiten können.
+Zum Einsatz kommen dabei sowohl Features die klassischerweise für Textklassifikation herangezogen werden wie Wortfrequenzen, Features die typischerweise eher für stilometrische Analysen verwendet werden wie Part-of-Speech Tags, sowie auf der vorhandenen Literatur zu Verschwörungstheorien basierende Features.
+Die Implementierung aller Funktionen dieser Arbeit erfolgt in der Programmiersprache \textit{R} \parencite{r_2021}
 
 Mit den so erstellten Daten soll abschließend ein Modell trainiert werden, dass zwischen den verschwörungstheoretischen Texten und dem Vergleichskorpus unterscheiden kann.
-Zum Einsatz kommen soll dazu \textit{LightGBM} \parencite[][]{lightgbm} eine Implementierung von Gradient Boosting Descision Trees [citation needed].
-Dieses Verfahren bietet neben der relativ guten Präzision den Vorteil, dass die Ergebnisse ähnlich einfachen Entscheidungsbäumen verhältnismäßig gut interpretierbar sind, so lässt sich gut der Einfluss einzelner Features auf die Klassifizierung abschätzen.
+Um die Effektivität der auf der Literatur basierten Features einschätzen zu können wird ein Datensatz erstellt der nur diese Features enthält, sowie ein weiterer Datensatz der alle Features enthält.
+Für jeden dieser Datensätze wird zunächst ein einfacher Entscheidungsbaum als Baseline Model trainiert.
+Für das endgültige Modell kommt die \textit{LightGBM} Bibliothek \parencite[][]{lightgbm}, eine Implementierung von Gradient Boosting Descision Trees \parencite*{friedman_2002}.
+
+Dieses Verfahren bietet neben der typischerweise relativ guten Präzision den Vorteil, dass die Ergebnisse, ähnlich einfachen Entscheidungsbäumen, verhältnismäßig gut interpretierbar sind.
+Dies soll es Erlauben den Einfluss einzelner Features auf die Vorhersagegenauigkeit zu bestimmen, insbesondere auch der aus der Literatur abgeleiteten Features.
