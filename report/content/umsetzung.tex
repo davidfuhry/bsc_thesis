@@ -235,6 +235,13 @@ Hierfür wurde ebenfalls zunächst ein Baseline Entscheidungsbaum trainiert.
 Dieser erreichte eine Präzision von 87.7\% und konnte damit den Entscheidungsbaum der auf dem kleineren Korpus trainiert wurde in Genauigkeit deutlich übertreffen.
 Interessant ist vor allem die verhältnismäßig geringe Sensitivität.
 
+Bevor das finale Modell trainiert wurde, wurde zunächst mittels eines Tunegrids eine optimierung der Hyperparameter der Lernrate sowie der Anzahl der äußersten Blätter durchgeführt.
+Getestete Werte waren dabei für die Lernrate 0.01, 0.05, 0.10, 0.20 und für die Blätterzahl 5, 50, 127 (Der Standardwert von lightGBM), 200.
+Das beste Ergebnis wurde mit einer Lernrate von 0.05 und einer Blätterzahl von 50 erzielt.
+Mit diesen Werten wurde erneut die optimale Iterationstiefe mittels Kreuzvalidierung bestimmt.
+Das mit diesen Parametern erstellte, finale Modell wurde schließlich mittels einer 10-Fold Kreuzvalidierung validiert und erreichte insgesamt eine Präzision von 98.14\%.
+
+
 \begin{table}
     \begin{center}
         \begin{tabularx}{\textwidth}{XXXX}
@@ -248,11 +255,4 @@ Interessant ist vor allem die verhältnismäßig geringe Sensitivität.
         \label{confusion-table}
     \end{center}
 \end{table}
-
-Bevor das finale Modell trainiert wurde, wurde zunächst mittels eines Tunegrids eine optimierung der Hyperparameter der Lernrate sowie der Anzahl der äußersten Blätter durchgeführt.
-Getestete Werte waren dabei für die Lernrate $0.01, 0.05, 0.10, 0.20$ und für die Blätterzahl $5, 50, 127 \text{(Der Standardwert von lightGBM)}, 200$.
-Das beste Ergebnis wurde mit einer Lernrate von 0.05 und einer Blätterzahl von 50 erzielt.
-Mit diesen Werten wurde erneut die optimale Iterationstiefe mittels Kreuzvalidierung bestimmt.
-Das mit diesen Parametern erstellte, finale Modell wurde schließlich mittels einer 10-Fold Kreuzvalidierung validiert und erreichte insgesamt eine Präzision von 98.14\%.
-
 %TODO: evtl. kurz drauf eingehen
