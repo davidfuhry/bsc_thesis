@@ -50,7 +50,11 @@ kableExtra::kbl(t(stats), format = "latex", booktabs = TRUE)
 
 ### Table for features
 
-
+wilcox.test(features$sentiments_sum[features$is_conspiracy == 1], features$sentiments_sum[features$is_conspiracy == 0])
+mean(features$sentiments_sum[features$is_conspiracy == 1], na.rm = TRUE)
+sd(features$sentiments_sum[features$is_conspiracy == 1], na.rm = TRUE)
+mean(features$sentiments_sum[features$is_conspiracy == 0], na.rm = TRUE)
+sd(features$sentiments_sum[features$is_conspiracy == 0], na.rm = TRUE)
 
 #### Frequency plot of publishing dates for conspiracy articles
 

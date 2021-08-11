@@ -78,7 +78,6 @@ if (!full_model) {
 
     result <- caret::confusionMatrix(as.factor(predicted), as.factor(validate_target), positive = "1")
 
-    results <- rbind(results, result)
     quit()
 }
 

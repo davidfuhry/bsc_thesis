@@ -1,7 +1,7 @@
 \section{Diskussion}
 
 Das kleinere, ausschließlich mit literaturbasierten Features trainierte Modell erreichte mit 87\% bereits eine relativ hohe Präzision.
-Dies kann dahingehend interpretiert werden, als dass die genutzten Features geeignet sind um verschöwrungstheoretische Texte von journalischen zu Unterscheiden.
+Dies kann dahingehend interpretiert werden, dass die genutzten Features grundsätzlich geeignet sind um verschöwrungstheoretische Texte von anderen zu Unterscheiden.
 Die verwendete \textit{lightGBM} Software erlaubt es die Bedeutung einzelner Features für das erstellte Modell abzuschätzten.
 Das Features mit dem höchsten Informationszuwachs (Gain) für das Modell ist die Anzahl der internen Links (Gain = $0.12$).
 Die Anzahl der externen Links hingegen bot einen deutlich geringeren Gain ($0.076$) für das Modell.
@@ -12,22 +12,30 @@ Interessant ist hier noch, dass anders als die Summe an Sentimentscores der Betr
 Dies kann zum einen daran liegen, dass diese Werte nicht vollständig unabhängig voneinander sind und der Trainingsalgorithmus deshalb u.U. nur einen der Werte berücksichtigt.
 Zum anderen kann es aber auch ein Indiz sein, dass Verschwörungstheoretische Texte nicht notwendigerweise allgemein emotionaler sind, aber im Schnitt deutlich negativere Sentimente Transportieren wie sich auch an den Durchschnittswerten der Sentimentsumme zeigt ($\overline{X} = -4.22$ gegenüber $\overline{X} = -1.35$).
 
-Die meisten anderen Features lieferten dem Modell einen mittelgroßen Informationszuwachs, besonders wenig nützlich für das Modell waren vor allem Features die mehr oder weniger mit anderen Features zusammenhängen (die Summe positiver bzw. negativer Sentimente, Menge der Scarequotes, Zahl der direkten Zitate, etc.) sowie die Menge an Negationen, an Zahlenangaben sowie allgemein an eingebetteten Medien (Twitter, Youtube, Sonstige).
+Die meisten anderen Features lieferten dem Modell einen mittelgroßen Informationszuwachs, besonders wenig nützlich waren vor allem Features die mehr oder weniger mit anderen Features zusammenhängen (die Summe positiver bzw. negativer Sentimente, Zahl der direkten Zitate, etc.), die Menge an Negationen, an Zahlenangaben sowie allgemein an eingebetteten Medien (Twitter, Youtube, Sonstige).
 Eine Erklärung für letztere könnte dabei aber auch schlicht sein, dass herkömmliche Medien inzwischen solche Medien auch häufiger einbinden und in diesem stilistischen Merkmal sich den Verschwörungstheorien angenähert haben.
 
-Es bleibt anzumerken, dass Verfahren des Maschinellen Lernenes wie hier Gradientenboosting komplexe Systeme sind und selbst in einem Fall indem der Einfluss der einzelnen Features auf das Modell abgeschätzt werden kann wie hier, die Interpretation solcher Ergebnisse immer schwierig und zu einem gewissen Teil spekulativ ist.
+Es bleibt anzumerken, dass Verfahren des Maschinellen Lernenes, wie hier Gradientenboosting, komplexe Systeme sind und selbst wenn wie hier der Einfluss einzelner Features auf das Modell abgeschätzt werden kann, die Interpretation solcher Ergebnisse immer schwierig und zu einem gewissen Teil spekulativ ist.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.45]{graphics/top_10_features.jpg}
+    \caption{Top-10 Features nach Bedeutung für das Modell. Namen in Großbuchstaben = Part-of-Speech Tag; Namen in kleinbuchstaben = tf-idf Worthäufigkeit; Benannte Features = Auf Literatur basierende Statistiken}
+    \label{top-features}
+\end{figure}
 
-Das vollständige Modell erreichte mit fast 98\% eine überraschend gute Präzision.
+\FloatBarrier
+
+Das vollständige Modell erreichte mit fast 98\% eine sehr gute Präzision.
 Es kann zuverlässig zwischen den Verschwörungstheoretischen Texten und dem Vergleichskorpus unterscheiden.
-Eine Betrachtung der wichtigsten Features des vollständigen Modells zeigt zunächst, dass viele der auch im ersten Model wichtigen Features wieder von großer Bedeutung sind (Zahl der Bilder, Zahl der internen Links, Summe der Sentimentscores und Anteil von zitiertem Text).
-Einige der Wörter mit dem meisten Einfluss auf die Klassifizierungen sind krieg, merkel und regierung.
-Dies sind durchaus erwartbare Ergebnisse, sind die Verwendung solcher Wörter in verschwörungstheretischen Texten doch gut belegt \todo{QUELLE}.
-Unter den wichtigen POS Tags sind Leerzeichen, Adverben, für fremdsprachigen Text (meist englischer Text, häufig zitiert) und für Coordinating Conjunctions (also Wörtern wie und, denn, aber, etc.).\todo{Tiger paper zitieren}
+Eine Betrachtung der wichtigsten Features aus Grafik \ref{top-features} zeigt zunächst, dass viele der auch im ersten Model wichtigen Features wieder von großer Bedeutung sind (Zahl der Bilder, Zahl der internen Links, Summe der Sentimentscores und Anteil von zitiertem Text).
+Einige der Wortfrequenzen mit dem meisten Einfluss auf die Klassifizierungen sind foto, krieg, merkel und regierung.
+Die meisten davon sind durchaus erwartbare Ergebnisse, die Verwendung von Worten aus solchen Themenbereichen ist in der Literatur gut belegt, etwa bei \textcite[150]{stumpf_2019} oder \textcite[25]{uscinski_2014}.
+Unter den wichtigen POS Tags sind Leerzeichen, Adverben, für fremdsprachigen Text (meist englischer Text, häufig zitiert) und für Coordinating Conjunctions (also Wörtern wie und, oder, aber, etc.\parencite*[vgl.][]{smith_2003}).
 Interessant ist auch, dass die Zahl der Fragezeichen im kleineren Modell zwar kaum relevant ist, im größeren Modell aber unter den 10 einflussreichsten Features.
 
-Es ist hier zu vermuten, dass die relativ geringe Vielfalt insbesondere des Ausgangskorpuses einen Teil zu der guten Leistung beigetragen hat.
-Auch wenn etwa \textit{Watergate.tv} mehrere Autor:innen haben, ist zu vermuten dass die totale Anzahl an Autor:innen im Korpus im niedrigen zweistelligen Bereich liegt.
-Da im Modell mit POS-Tags auch eher stilistische Features enthalten sind, ist es durchaus möglich, dass ein Teil der Leistung des Modells weniger auf verschwörungstheoretischen Merkmalen beruht als auf dem Autor:innen Stil.
-Dies könnte bedeuten, dass das Modell weniger gut generalisiert als es ein auf einem Korpus mit höherer Vielfalt trainiertes Modell tun würde.
+Eine mögliche Erklärung für die überraschend gute Leistung des trainierten Modells ist, dass die relativ geringe Vielfalt insbesondere des Ausgangskorpuses einen Teil zu der guten Leistung beigetragen hat.
+Auch wenn etwa für \textit{Watergate.tv} mehrere Autor:innen schreiben, ist zu vermuten dass die totale Anzahl an Autor:innen im Korpus im niedrigen zweistelligen Bereich liegt.
+Da für die Modellerstellung mit POS-Tags auch eher stilistische Features enthalten sind, ist es durchaus möglich, dass ein Teil der Leistung des Modells weniger auf verschwörungstheoretischen Merkmalen beruht als auf dem Stil der individuellen Autor:innen.
 
+Dieser Faktor dürfte in Kombination mit der relativ geringen Quellenzahl des Korpuses als auch des Vergleichskorpuses die Wahrscheinlichkeit, dass das hier trainierte Modell gut generalisiert deutlich verringern.
