@@ -1,21 +1,22 @@
 \section{Einleitung}
 
-Verschwörungstheorien sind aktuell häufig im Zentrum der Aufmerksamkeit.
-Während dieser, aktuelle Aufmerksamkeitsschub inhaltlich auf die aktuelle Pandemie zurückzuführen ist, bietet das Internet und die Verbreitung sozialer Medien das technische Fundament für die schnelle Verbrietung wie sie aktuell stattfindet.
-Das zunahmende Vernetzung solchen Theorien vorschub leistet ist keine neue Entwicklung, sondern wird schon länger im wissenschaftlichen Diskurs über Verschwörungstheorien beobachtet.
-Die wissenschaftliche Auseinandersetzung mit Verschwörungstheorien ist trotz des verstärkten Interesses in der jüngsten Vergangenheit bis heute eher verhalten.
+Verschwörungstheorien sind aktuell häufig im Zentrum der öffentlichen Aufmerksamkeit.
+Während dieser Aufmerksamkeitsschub vor allem auf die Covid-19 Pandemie zurückzuführen ist, erleben Verschwörungstheorien schon seit Anfang der 2000er Jahre einen Popularitätsanstieg.
+Dieser ist vor allem begründet in der zunehmenden Verbreitung des Internets und der sozialen Medien \parencite[vgl.][492]{stano_2020}.
 
-Die komplexe Natur von Verschwörungstheorien stellt die wissenschaftliche Auseinandersetzung mit ihnen vor einige Grundlegende Probleme.
-Das offensichtlichste davon ist sicherlich die Frage was überhaupt eine Verschwörungstheorie ist.
-Hierzu existiert vor allem in der Wissenssoziologie eine Vielzahl von Literatur, ein klarer Konsens über eine Definition von Verschwörungstheorien fehlt jedoch bislang.
-Insbesondere für die Arbeit mit Beiträgen aus sozialen Netzen und anderen Online-Quellen schließt sich die Frage an, wie Verschwörungstheoretische Beiträge zuverlässig identifiziert werden können.
-Der Nutzen solcher Techniken nicht nur innerhalb der Wissenschaft ist naheliegend, so versuchen auch die Betreiber von sozialen Netzwerken daran verschwörungstheoretische Inhalte automatisiert zu erkennen (Beispiel google/youztube).
-In der Forschung wird dieses Problem klassischerweise mit der Hilfe einer Vielzahl von Hilfskräften gelöst, die die Daten manuell bearbeiten. (Studie mit codierern)
+Eine der Kernfragen in der wissenschaftlichen Auseinandersetzung mit Verschwörungstheorien ist die Frage was eine Verschwörungstheorie ist und was nicht.
+Eine theoretische Auseinandersetzung mit dieser Frage findet insbesondere in der Wissensoziologie und der Philosophie statt.\footnote{Siehe z.B. \textcite[]{coady_2006} oder auch \textcite{uscinski_2014}.}
+Weitgehend unbeantwortet ist hingegen wie sich diese Frage quantitativ beantworten lässt.
+Die wenigen hierzu veröffentlichten Arbeiten nutzen meist verhältnismäßig spezifische und komplexe Methoden.\footnote{Siehe etwa \textcite[]{samory_2018} oder \textcite[]{shahsavari_2020}.}
 
-Diese Arbeit stellt einen Ansatz vor, dieses Problem mit Technologien der automatischen Sprachverarbeitung und des maschinellen Lernens zu lösen.
-Primär werden dabei stilistische Merkmale der untersuchten Texte genutzt und nur sekundär inhaltliche Informationen wie das Verwenden von Schlüsselwörtern etc.
-Durch das Verwenden solcher Technologien kann zum einen der Resourcenaufwand drastisch reduziert werden, aber auch die Abhängigkeit von komplexen und damit fehleranfälligen Kriterien für die Klassifizierung lässt sich so umgehen.
-Auch ist der hier vorgestellte Ansatz durch den Fokus auf stilistisceh Merkmale verhältnissmäßig robust gegenüber neuen inhaltlichen Entwicklungen der Verschwörungstheorien und somit potentiell zukunftssicherer als vergleichbare Ansätze.
+Diese Arbeit stellt einen Ansatz vor, der versucht dieses Problem mit Methoden des Text-Mining und des maschinellen Lernens zu lösen.
+Der vorgestellte Ansatz ist dabei deutlich allgemeiner als die in der Literatur vertretenen und versucht verschwörungstheoretische Texte mittels sprachlicher und stilistischer Merkmale zu identifizieren.
 
-Im folgenden soll zunächst ein kurzer Abriss über den aktuellen Stand der wissenschaftlichen Auseinandersetzung mit Verschöwrungstheorien allgemein, sowie der Forschung zu linguistischen Merkmalen im speziellen, gegeben werden.
-Anschließend soll kurz auf die verwendeten Technologien sowie die Datengrundlage dieser Arbeit gegeben werden, bevor konkrete Ergebnisse diskutiert werden.
+Es wird dafür ein Korpus aus Artikeln von 7 Webportalen der deutschsprachigen, verschwörungstheoretischen Szene ausgewertet. 
+Aus diesem werden Features extrahiert, die anschließend genutzt werden um ein Modell zu trainieren, welches diese Artikel von (wissenschafts-)journalistischen Artikeln unterscheiden kann.
+Dabei erfolgt ein Rückgriff auf in der bestehenden, überwiegend qualitativen Forschung gemachte Erkenntnisse und Beobachtung.
+Auch werden Methoden aus der natürlichen Sprachverarbeitung verwendet um Features aus Wortfrequenzen und Part-of-Speech Tags zu erstellen.
+
+Das erstellte Modell kann präzise verschwörungstheoretische Artikel identifizieren und von denen im Vergleichskorpus unterscheiden.
+Die dabei gemachten Beobachtungen können dabei helfen in der qualitativen Forschung gemachte Beobachtungen quantitativ zu validieren.
+Auch könnte die hier vorgestellte Methode hilfreich sein um verschwörungstheoretische Inhalte in größeren Datenmengen zu identifizieren.
