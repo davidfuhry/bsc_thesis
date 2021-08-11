@@ -69,3 +69,30 @@ ggplot(consp_data, aes(x = date, y = n)) +
     labs(x = "Veröffentlichungsdatum", y = "Anzahl Artikel")
 
 ggsave("report/graphics/cons_freq_time.jpg")
+
+
+# Importance plot
+
+top_10_imp <- importance[1:10, ] %>%
+    mutate(Feature = forcats::fct_reorder(Feature, Gain))
+ggplot(top_10_imp, aes(x = Gain, y = Feature)) + geom_bar(stat = "identity") + theme(text = element_text(size = 15))
+
+ggsave("report/graphics/top_10_features.jpg")
+
+# Make confusion matrix
+
+predictedClass <- factor(c(0,0,1,1))
+actualClass <- factor(c(0,1,0,1))
+Y <- c(33288, 368, 634, 16468)
+df <- data.frame(predictedClass, actualClass, Y)
+ggplot(data =  df, mapping = aes(x = predictedClass, y = actualClass)) +
+    geom_tile(aes(fill = Y), colour = "white") +
+    geom_text(aes(label = sprintf("%1.0f", Y)), vjust = 0.5, size = 5) +
+    theme(legend.position = "none", text = element_text(size = 15)) +
+    scale_fill_gradient(low = "#D6EAF8", high = "#2E86C1") +
+    xlab("Vorhergesagte Klasse") +
+    ylab("Tatsächliche Klasse")
+
+ggsave("report/graphics/confusion_matrix.jpg")
+
+
