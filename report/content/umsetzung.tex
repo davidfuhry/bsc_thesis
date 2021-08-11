@@ -221,8 +221,8 @@ Auch ist ersichtlich, dass das komplexere \textit{LightGBM} Modell eine in allen
             \toprule
             Modell & Accuracy & Sensitivity & Specificity & AUC\\
             \midrule
-            dtree & 0.8771 & 0.7941 & 0.9158 & 0.901061 \\
-            lightGBM (10-Fold Kreuzvalidierung) & 0.9814 & 0.9781 & 0.9828 & N/A \\
+            dtree & 0.8668 & 0.7845 & 0.9052 & 0.881973 \\
+            lightGBM\footnotemark & 0.9784 & 0.9770 & 0.9791 & N/A \\
             \bottomrule
         \end{tabularx}
         \caption{Ergebnisse der Klassifizierer auf dem vollständigen Datensatz}
@@ -230,17 +230,11 @@ Auch ist ersichtlich, dass das komplexere \textit{LightGBM} Modell eine in allen
     \end{center}
 \end{table}
 
+
 Im weiteren wurde ein Modell mit allen vorhandenen Features erstellt.
 Hierfür wurde ebenfalls zunächst ein Baseline Entscheidungsbaum trainiert.
 Dieser erreichte eine Präzision von 87.7\% und konnte damit den Entscheidungsbaum der auf dem kleineren Korpus trainiert wurde in Genauigkeit deutlich übertreffen.
 Interessant ist vor allem die verhältnismäßig geringe Sensitivität.
-
-Bevor das finale Modell trainiert wurde, wurde zunächst mittels eines Tunegrids eine optimierung der Hyperparameter der Lernrate sowie der Anzahl der äußersten Blätter durchgeführt.
-Getestete Werte waren dabei für die Lernrate 0.01, 0.05, 0.10, 0.20 und für die Blätterzahl 5, 50, 127 (Der Standardwert von lightGBM), 200.
-Das beste Ergebnis wurde mit einer Lernrate von 0.05 und einer Blätterzahl von 50 erzielt.
-Mit diesen Werten wurde erneut die optimale Iterationstiefe mittels Kreuzvalidierung bestimmt.
-Das mit diesen Parametern erstellte, finale Modell wurde schließlich mittels einer 10-Fold Kreuzvalidierung validiert und erreichte insgesamt eine Präzision von 98.14\%.
-
 
 \begin{table}
     \begin{center}
@@ -255,4 +249,11 @@ Das mit diesen Parametern erstellte, finale Modell wurde schließlich mittels ei
         \label{confusion-table}
     \end{center}
 \end{table}
-%TODO: evtl. kurz drauf eingehen
+
+Bevor das finale Modell trainiert wurde, wurde zunächst mittels eines Tunegrids eine optimierung der Hyperparameter der Lernrate sowie der Anzahl der äußersten Blätter durchgeführt.
+Getestete Werte waren dabei für die Lernrate 0.01, 0.05, 0.10, 0.20 und für die Blätterzahl 5, 50, 127 (Der Standardwert von lightGBM), 200.
+Das beste Ergebnis wurde mit einer Lernrate von 0.05 und einer Blätterzahl von 50 erzielt.
+Mit diesen Werten wurde erneut die optimale Iterationstiefe mittels Kreuzvalidierung bestimmt.
+Das mit diesen Parametern erstellte, finale Modell wurde schließlich mittels einer 10-Fold Kreuzvalidierung validiert und erreichte insgesamt eine Präzision von 98.14\%.
+
+\footnotetext{10-Fold Kreuzvalidiert}

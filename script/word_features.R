@@ -29,10 +29,9 @@ word_counts <- words %>%
 
 word_counts %<>% filter(total > 500) %>%
     filter(stringr::str_detect(lemma, stringr::regex("^[-a-zÀ-ÿ]+$", ignore_case = TRUE))) %>%
-    filter(lemma != "-") %>%
-    filter(lemma != "dass") %>%
+    filter(!(lemma %in% c("-", "dass", "on", "icon", "dpa", "spiegel"))) %>%
     arrange(desc(total)) %>%
-    slice(1:400)
+    slice(1:399) # 399 to correct for a very late change to the final model
 
 words %<>% filter(lemma %in% word_counts$lemma)
 

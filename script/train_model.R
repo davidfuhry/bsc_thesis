@@ -76,15 +76,7 @@ if (!full_model) {
 
     predicted <- ifelse(predicted >= cp$optimal_cutpoint, 1, 0)
 
-    cl <- dplyr::tibble(fold = i,
-                        id = features$id[inValidate],
-                        class = features$is_conspiracy[inValidate],
-                        prediction = predicted,
-                        wrong_prediction = (prediction != class))
-
-    classifications[[i]] <- cl
-
-    result <- caret::confusionMatrix(as.factor(predicted), as.factor(validate_target), positive = "1")$overall
+    result <- caret::confusionMatrix(as.factor(predicted), as.factor(validate_target), positive = "1")
 
     results <- rbind(results, result)
     quit()
