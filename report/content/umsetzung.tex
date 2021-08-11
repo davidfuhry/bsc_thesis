@@ -24,18 +24,17 @@ Es besteht weiterhin ein negativer Zusammenhang zwischen der Artikellänge und d
 
 \begin{table}
     \begin{center}
-        \begin{tabularx}{\textwidth}{lXXXXX}
+        \begin{tabularx}{\textwidth}{l|XXXXX}
             \toprule
-            & Von & Bis & Mittlere Zeichenzahl & Anzahl Artikel & Artikel/Monat\\
+            & Von & Bis & Mittlere Zeichenzahl & Anzahl Artikel & Artikel/ Monat\\
             \midrule
-            Alles Schall und Rauch & 23.08.2006 & 02.08.2020 & 5000 & 5349 & 32.0\\
-            conrebbi & 05.09.2012 & 20.10.2014 & 5610 & 24 & 1.0\\
-            deutschlandpranger & 29.10.2016 & 30.12.2020 & 7527 & 118 & 2.4\\
-            fm-tv & 31.07.2008 & 02.11.2018 & 9158 & 97 & 0.8\\
-            hinterderfichte & 16.01.2010 & 31.05.2018 & 4221 & 1083 & 10.8\\
-            \addlinespace
-            recentr & 03.08.2007 & 05.08.2020 & 5071 & 4762 & 30.5\\
-            Watergate.tv & 20.05.2016 & 16.11.2020 & 2810 & 5403 & 101.9\\
+            Alles Schall und Rauch & 23.08.06 & 02.08.20 & 5000 & 5349 & 32.0\\
+            conrebbi & 05.09.12 & 20.10.14 & 5610 & 24 & 1.0\\
+            deutschlandpranger & 29.10.16 & 30.12.20 & 7527 & 118 & 2.4\\
+            fm-tv & 31.07.08 & 02.11.18 & 9158 & 97 & 0.8\\
+            hinterderfichte & 16.01.10 & 31.05.18 & 4221 & 1083 & 10.8\\
+            recentr & 03.08.07 & 05.08.20 & 5071 & 4762 & 30.5\\
+            Watergate.tv & 20.05.16 & 16.11.20 & 2810 & 5403 & 101.9\\
             \bottomrule
             \end{tabularx}
         \caption{Kennzahlen der einzelnen Quellen des Korpuses}
@@ -97,14 +96,14 @@ Genauere Kennwerte zum Vergleichskorpus sind Tabelle \ref{comcorpus-stats} zu en
 
 \begin{table}
     \begin{center}
-        \begin{tabularx}{\textwidth}{XXXXXX}
+        \begin{tabularx}{\textwidth}{l|XXXXX}
             \toprule
             & Von & Bis & Mittlere Zeichenzahl & Anzahl Artikel & Artikel/Monat\\
             \midrule
-            Frankfurter Rundschau & 03.08.2006 & 04.08.2020 & 3670 & 9959 & 59.3\\
-            scienceblogs & 14.02.2007 & 04.08.2020 & 3261 & 8765 & 54.4\\
-            scilogs & 29.12.2000 & 03.08.2020 & 5206 & 9533 & 40.6\\
-            Spiegel Online & 01.08.2006 & 07.01.2020 & 4687 & 8665 & 53.8\\
+            Frankfurter Rundschau & 03.08.06 & 04.08.20 & 3670 & 9959 & 59.3\\
+            scienceblogs & 14.02.07 & 04.08.20 & 3261 & 8765 & 54.4\\
+            scilogs & 29.12.00 & 03.08.20 & 5206 & 9533 & 40.6\\
+            Spiegel Online & 01.08.06 & 07.01.20 & 4687 & 8665 & 53.8\\
             \bottomrule
         \end{tabularx}
         \caption{Kennzahlen der einzelnen Quellen des Vergleiskorpuses}
@@ -154,7 +153,7 @@ Ebenso wurde als stilistisches Merkmal die Menge an fettgedruckten und kursiven 
 
 \begin{table}
     \begin{center}
-        \begin{tabularx}{\textwidth}{XXXXXXX}
+        \begin{tabularx}{\textwidth}{l|XXXXXX}
             \toprule
             Feature & \multicolumn{2}{X}{Korpus} & \multicolumn{2}{X}{Vergleichskorpus} & W & p\\
             & $\overline{X}$ & $\sigma$ & $\overline{X}$ & $\sigma$ & & \\
@@ -164,7 +163,6 @@ Ebenso wurde als stilistisches Merkmal die Menge an fettgedruckten und kursiven 
           Youtube-Videos & 0.016 & 0.088 & 0.004 & 0.037 & \num{3.45e8} & $<0.01$\\
           Interne Links & 0.0094 & 0.066 & 0.077 & 0.274 & \num{2.31e8} & $<0.01$\\
           Externe Links & 0.081 & 0.2 & 0.12 & 0.434 & \num{3.16e8} & $<0.01$\\
-          \addlinespace
           Negationen & 0.158 & 0.11 & 0.151 & 0.109 & \num{3.23e8} & $<0.01$\\
           Anteil Zitation & 9.351 & 18.062 & 7.373 & 13.984 & \num{2.91e8} & $<0.01$\\
           Sentimente Betrag & 8.778 & 9.615 & 7.649 & 8.039 & \num{3.15e8} & $<0.01$\\
@@ -192,7 +190,7 @@ Das auf den Trainingsdaten trainierte Modell erreichte eine Präzision von 75.3\
 
 \begin{table}
     \begin{center}
-        \begin{tabularx}{\textwidth}{XXXXX}
+        \begin{tabularx}{\textwidth}{X|XXXX}
             \toprule
             Modell & Accuracy & Sensitivity & Specificity & AUC\\
             \midrule
@@ -217,7 +215,7 @@ Auch ist ersichtlich, dass das komplexere \textit{LightGBM} Modell eine in allen
 
 \begin{table}
     \begin{center}
-        \begin{tabularx}{\textwidth}{XXXXX}
+        \begin{tabularx}{\textwidth}{X|XXXX}
             \toprule
             Modell & Accuracy & Sensitivity & Specificity & AUC\\
             \midrule
@@ -236,19 +234,28 @@ Hierfür wurde ebenfalls zunächst ein Baseline Entscheidungsbaum trainiert.
 Dieser erreichte eine Präzision von 87.7\% und konnte damit den Entscheidungsbaum der auf dem kleineren Korpus trainiert wurde in Genauigkeit deutlich übertreffen.
 Interessant ist vor allem die verhältnismäßig geringe Sensitivität.
 
-\begin{table}
-    \begin{center}
-        \begin{tabularx}{\textwidth}{XXXX}
-            \toprule
-            & & \multicolumn{2}{X}{Referenz}\\
-            & & 0 & 1 \\
-            \multirow{2}{*}{Vorhersage} & 0 & 33288 & 368 \\
-            & 1 & 634 & 16468 \\\midrule
-        \end{tabularx}
-        \caption{Confusion-Table des finalen Modells}
-        \label{confusion-table}
-    \end{center}
-\end{table}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.45]{graphics/confusion_matrix.jpg}
+    \caption{Confusion-Matrix der 10-Fold Kreuzvalidierung des finalen Models}
+    \label{confusion-table}
+\end{figure}
+
+% \begin{table}
+%     \begin{center}
+%         \begin{tabularx}{\textwidth}{XX|XX}
+%             \cmidrule{3-4}
+%             & & \multicolumn{2}{X}{Referenz}\\
+%             & & 0 & 1 \\
+%             \hline
+%             \multirow{2}{*}{Vorhersage} & 0 & 33288 & 368 \\
+%             \cmidrule{2-4}
+%             & 1 & 634 & 16468 \\\midrule
+%         \end{tabularx}
+%         \caption{Confusion-Table des finalen Modells}
+%         \label{confusion-table}
+%     \end{center}
+% \end{table}
 
 Bevor das finale Modell trainiert wurde, wurde zunächst mittels eines Tunegrids eine optimierung der Hyperparameter der Lernrate sowie der Anzahl der äußersten Blätter durchgeführt.
 Getestete Werte waren dabei für die Lernrate 0.01, 0.05, 0.10, 0.20 und für die Blätterzahl 5, 50, 127 (Der Standardwert von lightGBM), 200.
