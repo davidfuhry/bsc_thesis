@@ -1,18 +1,19 @@
 \section{Vorgehen}
 
-Als Grundlage dieser Arbeit dient ein Korpus aus Texten von deutschsprachigen Internetportalen, die der verschwörungstheoretischen, bzw. Truther Szene zuzuordnen sind.
-Diese wurde im Verlauf der letzten Jahre über Webcrawling zusammengestellt.
+Als Grundlage dieser Arbeit dient ein Korpus aus Texten von deutschsprachigen Internetportalen, die der verschwörungstheoretischen Szene zuzuordnen sind.
+Dieser wurde im Verlauf der letzten Jahre über Webcrawling zusammengestellt.
 
-Um einen strukturierte Analyse mit Methoden des maschinellen Lernens zu ermöglichen wird ein Vergleichskorpus mit Artikeln die dem Untersuchungskorpus von Form und Thematik möglich ähnlich gelagert sind, ohne aber dessen verschwörungstheoretischen Aspekte zu teilen.
+Um eine strukturierte Analyse mit Methoden des maschinellen Lernens zu ermöglichen, wird ein Vergleichskorpus mit (wissenschafts-)journalistischen Artikeln die dem Untersuchungskorpus von Form und Thematik möglich ähnlich gelagert sind verwendet.
 
-Anschließend werden die Korpora gereinigt und mit Verfahren aus der natürlichen Sprachverarbeitung Features extrahiert auf denen Klassifizierungsverfahren arbeiten können.
-Zum Einsatz kommen dabei sowohl Features die klassischerweise für Textklassifikation herangezogen werden wie Wortfrequenzen, Features die typischerweise eher für stilometrische Analysen verwendet werden wie Part-of-Speech Tags, sowie auf der vorhandenen Literatur zu Verschwörungstheorien basierende Features.
-Die Implementierung aller Funktionen dieser Arbeit erfolgt in der Programmiersprache \textit{R} \parencite{r_2021}
+Anschließend werden aus den Textkorpora mit Verfahren aus der natürlichen Sprachverarbeitung Features extrahiert, auf denen Klassifizierungsverfahren arbeiten können.
+Zum Einsatz kommen dabei sowohl Features die klassischerweise für Textklassifikation herangezogen werden (Wortfrequenzen), Features die eher für stilometrische Analysen verwendet werden (Part-of-Speech Tags), sowie auf Ergebnissen der vorhandenen Literatur zu Verschwörungstheorien basierende Features.
+Die Implementierung aller Funktionen dieser Arbeit erfolgt in der Programmiersprache \textit{R} \parencite{r_2021}.
 
-Mit den so erstellten Daten soll abschließend ein Modell trainiert werden, dass zwischen den verschwörungstheoretischen Texten und dem Vergleichskorpus unterscheiden kann.
-Um die Effektivität der auf der Literatur basierten Features einschätzen zu können wird ein Datensatz erstellt der nur diese Features enthält, sowie ein weiterer Datensatz der alle Features enthält.
-Für jeden dieser Datensätze wird zunächst ein einfacher Entscheidungsbaum als Baseline Model trainiert.
-Für das endgültige Modell kommt die \textit{LightGBM} Bibliothek \parencite[][]{lightgbm}, eine Implementierung von Gradient Boosting Descision Trees \parencite*{friedman_2002}.
+Mit den so erstellten Daten soll ein Modell trainiert werden, dass zwischen den verschwörungstheoretischen Artikeln und denen aus dem Vergleichskorpus unterscheiden kann.
+Um die Effektivität der auf der Literatur basierten Features besser einschätzen zu können wird zunächst ein Modell nur mit diesen Features trainiert.
+Im Anschluss wird ein weiteres Modell trainiert, dass zusätzlich noch Wortfrequenzen und Part-of-Speech Tags als Features enthält.
+Für jeden dieser Datensätze wird zunächst ein einfacher Entscheidungsbaum als Baseline Modell trainiert.
+Für das endgültige Modell kommt die \textit{LightGBM} Bibliothek \parencite[][]{lightgbm} zum Einsatz, eine Implementierung von Gradient Boosting Descision Trees \parencite{friedman_2002}.
 
-Dieses Verfahren bietet neben der typischerweise relativ guten Präzision den Vorteil, dass die Ergebnisse, ähnlich einfachen Entscheidungsbäumen, verhältnismäßig gut interpretierbar sind.
+Dieses Verfahren bietet neben der typischerweise guten Präzision den Vorteil, dass die Ergebnisse, ähnlich einfachen Entscheidungsbäumen, verhältnismäßig gut interpretierbar sind.
 Dies soll es Erlauben den Einfluss einzelner Features auf die Vorhersagegenauigkeit zu bestimmen, insbesondere auch der aus der Literatur abgeleiteten Features.
