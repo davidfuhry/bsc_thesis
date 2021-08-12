@@ -101,7 +101,7 @@ Genauere Kennwerte zum Vergleichskorpus sind Tabelle \ref{comcorpus-stats} zu en
 
 \begin{table}
     \begin{center}
-        \begin{tabularx}{\textwidth}{l|XXXXX}
+        \begin{tabularx}{\textwidth}{lXXXXX}
             \toprule
             & Von & Bis & Zeichen/ Artikel & Anzahl Artikel & Artikel/ Monat\\
             \midrule
@@ -126,7 +126,7 @@ Weiterhin wurden noch kleinere Korrekturen vorgenommen, wie das Zusammenfassen m
 
 Abschließend wurden noch alle Texte unter 100 Zeichen Länge aus dem Korpus entfernt, da diese nur wenig Informationen enthalten können. Der finale Korpus umfasste 53758 Texte, mit einem Anteil der positiven Klasse (sprich von verschwörungstheoretischen Texten) von etwa 32\%.
 
-\subsection{Features}
+\subsection{Feature-Engineering}
 
 Zunächst wurden Features basierend auf den in der Literatur beobachteten, linguistischen Eigenschaften von verschwörungstheoretischen Texten erstellt.
 Die etwa von \textcite*[10]{miller_2002} festgestellte Emotionalität wurde mit der Methode der Sentimentanalyse erfasst.
@@ -201,7 +201,7 @@ Das auf den Trainingsdaten trainierte Modell erreichte eine Präzision von 75.3\
             Modell & Accuracy & Sensitivity & Specificity & AUC\\
             \midrule
             dtree & 0.7534 & 0.7761 & 0.7428 & 0.829445 \\
-            LightGBM & 0.8745 & 0.8700 & 0.8766 & .0.950817 \\
+            LightGBM & 0.8745 & 0.8700 & 0.8766 & 0.950817 \\
             \bottomrule
         \end{tabularx}
         \caption{Ergebnisse der Klassifizierer nur auf literaturbasierten Features}
@@ -242,7 +242,7 @@ Hervorzuheben ist vor allem die verhältnismäßig geringe Sensitivität.
 \begin{figure}[ht]
     \centering
     \includegraphics[scale=0.45]{graphics/confusion_matrix.jpg}
-    \caption{Confusion-Matrix der 10-Fold Kreuzvalidierung des finalen Models}
+    \caption{Confusion-Matrix nach 10-Fold Kreuzvalidierung des finalen Modells}
     \label{confusion-table}
 \end{figure}
 

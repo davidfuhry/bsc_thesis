@@ -1,7 +1,7 @@
 % !TeX program = xelatex
 % !BIB program = biber
 
-\documentclass{article}
+\documentclass[a4paper]{article}
 
 \usepackage{longtable}
 \usepackage{array}
@@ -118,8 +118,29 @@
 % ---- Bibliography ----
 %
 %
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
 \printbibliography[title=Literatur, keyword=literature]
 \printbibliography[title=Software, keyword=software]
 \printbibliography[title=Online, keyword=online]
+
+\clearpage
+
+% Die eidesstattliche Erklärung mit Unterschrift
+\textbf{Erklärung der Urheberschaft}
+
+\vspace{1cm}
+
+Hiermit erkläre ich, daß ich die vorliegende Arbeit
+selbstständig angefertigt, nicht anderweitig zu Prüfungszwecken vorgelegt und
+keine anderen als die angegebenen Hilfsmittel verwendet habe. Sämtliche 
+wissentlich verwendete Textausschnitte, Zitate oder Inhalte anderer Verfasser 
+wurden ausdrücklich als solche gekennzeichnet.
+
+\vfill
+
+\hspace{2cm} Ort, Datum \hfill Unterschrift \hspace{2cm}
+
 
 \end{document}

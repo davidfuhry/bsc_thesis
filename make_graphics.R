@@ -59,14 +59,15 @@ sd(features$sentiments_sum[features$is_conspiracy == 0], na.rm = TRUE)
 #### Frequency plot of publishing dates for conspiracy articles
 
 consp_data <- corpus %>%
-    filter(is_conspiracy == TRUE) %>%
+    filter(is_conspiracy == 1) %>%
     mutate(date = format(date, "%Y-%m")) %>%
     count(date) %>%
     mutate(date = lubridate::ym(date))
 
 ggplot(consp_data, aes(x = date, y = n)) +
     geom_line() +
-    labs(x = "Veröffentlichungsdatum", y = "Anzahl Artikel")
+    labs(x = "Veröffentlichungsdatum", y = "Anzahl Artikel") +
+    theme(text = element_text(size = 18))
 
 ggsave("report/graphics/cons_freq_time.jpg")
 
@@ -75,7 +76,7 @@ ggsave("report/graphics/cons_freq_time.jpg")
 
 top_10_imp <- importance[1:10, ] %>%
     mutate(Feature = forcats::fct_reorder(Feature, Gain))
-ggplot(top_10_imp, aes(x = Gain, y = Feature)) + geom_bar(stat = "identity") + theme(text = element_text(size = 15))
+ggplot(top_10_imp, aes(x = Gain, y = Feature)) + geom_bar(stat = "identity") + theme(text = element_text(size = 18))
 
 ggsave("report/graphics/top_10_features.jpg")
 
@@ -87,8 +88,8 @@ Y <- c(33288, 368, 634, 16468)
 df <- data.frame(predictedClass, actualClass, Y)
 ggplot(data =  df, mapping = aes(x = predictedClass, y = actualClass)) +
     geom_tile(aes(fill = Y), colour = "white") +
-    geom_text(aes(label = sprintf("%1.0f", Y)), vjust = 0.5, size = 5) +
-    theme(legend.position = "none", text = element_text(size = 15)) +
+    geom_text(aes(label = sprintf("%1.0f", Y)), vjust = 0.5, size = 8) +
+    theme(legend.position = "none", text = element_text(size = 18)) +
     scale_fill_gradient(low = "#D6EAF8", high = "#2E86C1") +
     xlab("Vorhergesagte Klasse") +
     ylab("Tatsächliche Klasse")
