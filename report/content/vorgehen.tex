@@ -3,16 +3,16 @@
 Als Grundlage dieser Arbeit dient ein Korpus aus Texten von deutschsprachigen Internetportalen, die der verschwörungstheoretischen Szene zuzuordnen sind.
 Dieser wurde im Verlauf der letzten Jahre über Webcrawling zusammengestellt.
 
-Um eine strukturierte Analyse mit Methoden des maschinellen Lernens zu ermöglichen, wird ein Vergleichskorpus mit (wissenschafts-) journalistischen Artikeln die dem Untersuchungskorpus von Form und Thematik möglich ähnlich gelagert sind verwendet.
+Um eine strukturierte Analyse mit Methoden des maschinellen Lernens zu ermöglichen, wird ein Vergleichskorpus mit (wissenschafts-)journalistischen Artikeln, die dem Untersuchungskorpus von Form und Thematik möglich ähnlich gelagert sind, verwendet.
 
 Anschließend werden aus den Textkorpora mit Verfahren aus der natürlichen Sprachverarbeitung Features extrahiert, auf denen Klassifizierungsverfahren arbeiten können.
 Zum Einsatz kommen dabei sowohl Features die klassischerweise für Textklassifikation herangezogen werden (Wortfrequenzen), Features die eher für stilometrische Analysen verwendet werden (Part-of-Speech Tags), sowie auf Ergebnissen der vorhandenen Literatur zu Verschwörungstheorien basierende Features.
 Die Implementierung aller Funktionen dieser Arbeit erfolgt in der Programmiersprache \textit{R} \parencite{r_2021}.
 
-Mit den so erstellten Daten soll ein Modell trainiert werden, dass zwischen den verschwörungstheoretischen Artikeln und denen aus dem Vergleichskorpus unterscheiden kann.
+Mit den so erstellten Daten wird ein Modell trainiert, dass zwischen den verschwörungstheoretischen Artikeln und denen aus dem Vergleichskorpus unterscheiden kann.
 Um die Effektivität der auf der Literatur basierten Features besser einschätzen zu können wird zunächst ein Modell nur mit diesen Features trainiert.
 Im Anschluss wird ein weiteres Modell trainiert, dass zusätzlich noch Wortfrequenzen und Part-of-Speech Tags als Features enthält.
-Für jeden dieser Datensätze wird zunächst ein einfacher Entscheidungsbaum als Baseline Modell trainiert.
+Für beide Datensätze wird zunächst ein einfacher Entscheidungsbaum als Baseline Modell trainiert.
 Für das endgültige Modell kommt die \textit{LightGBM} Bibliothek \parencite[][]{lightgbm} zum Einsatz, eine Implementierung von Gradient Boosting Descision Trees \parencite{friedman_2002}.
 
 Dieses Verfahren bietet neben der typischerweise guten Präzision den Vorteil, dass die Ergebnisse, ähnlich einfachen Entscheidungsbäumen, verhältnismäßig gut interpretierbar sind.

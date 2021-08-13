@@ -1,7 +1,7 @@
 \section{Diskussion}
 
 Das kleinere, ausschließlich mit literaturbasierten Features trainierte Modell erreichte mit 87\% bereits eine hohe Präzision.
-Dies kann dahingehend interpretiert werden, dass die genutzten Features grundsätzlich geeignet sind um verschwörungstheoretische Texte von (wissenschafts-) journalistischen zu Unterscheiden.
+Dies kann dahingehend interpretiert werden, dass die genutzten Features grundsätzlich geeignet sind um verschwörungstheoretische Texte von (wissenschafts-)journalistischen zu Unterscheiden.
 
 Die verwendete \textit{LightGBM} Software erlaubt es die Bedeutung einzelner Features für das erstellte Modell abzuschätzen.
 Das Feature mit dem höchsten Informationszuwachs (Gain) für das Modell ist die Anzahl der internen Links (Gain = $0.12$).
@@ -16,7 +16,7 @@ Dies bestätigt sich auch an den Durchschnittswerten der Sentimentsumme ($\overl
 
 Die meisten anderen Features lieferten dem Modell einen mittelgroßen Informationszuwachs, besonders wenig nützlich waren vor allem Features, die mehr oder weniger mit anderen Features zusammenhängen (die Summe positiver bzw. negativer Sentimente, Zahl der direkten Zitate, etc.), was durchaus erwartbar ist.
 Ebenso relativ wenig hilfreich waren die Menge an Negationen, an Zahlenangaben sowie allgemein an eingebetteten Medien (Twitter, Youtube, Sonstige).
-Eine Erklärung für letztere könnte dabei aber auch schlicht sein, dass herkömmliche Medien inzwischen solche Medien auch häufiger einbinden und in diesem stilistischen Merkmal sich den Verschwörungstheorien angenähert haben.
+Eine Erklärung für letztere könnte dabei aber auch schlicht sein, dass herkömmliche Medien inzwischen solche Medien auch häufiger einbinden und sich in diesem stilistischen Merkmal den Verschwörungstheorien angenähert haben.
 
 Es bleibt anzumerken, dass Verfahren des maschinellen Lernens, wie hier Gradienten-Boosting, komplexe Systeme sind und die Interpretation solcher Ergebnisse immer mit Vorsicht vorgenommen werden sollte.
 
@@ -34,7 +34,7 @@ Es kann zuverlässig zwischen den Verschwörungstheoretischen Texten und dem Ver
 Eine Betrachtung der wichtigsten Features aus Grafik \ref{top-features} zeigt zunächst, dass viele der auch für das kleinere Model wichtigen Features wieder von großer Bedeutung sind (Zahl der Bilder, Zahl der internen Links, Summe der Sentiment Scores und Anteil von zitiertem Text).
 Einige der Wortfrequenzen mit dem meisten Einfluss auf die Klassifizierungen sind Foto, Krieg, Merkel und Regierung.
 Die meisten davon sind wenig überraschende Ergebnisse, die Verwendung von Worten aus Themenbereichen wie Krieg und Macht ist in der Literatur gut belegt, etwa bei \textcite[150]{stumpf_2019} oder \textcite[25]{uscinski_2014}.
-Unter den wichtigen POS Tags sind Leerzeichen, Adverben, fremdsprachiger Text und Coordinating Conjunctions (also Wörtern wie und, oder, aber, etc. \parencite[vgl.][]{smith_2003}).
+Unter den wichtigen Part-of-Speech Tags sind Leerzeichen, Adverben, fremdsprachiger Text und Coordinating Conjunctions (also Wörtern wie und, oder, aber, etc. \parencite[vgl.][]{smith_2003}).
 Interessant ist auch, dass die Zahl der Fragezeichen im kleineren Modell zwar kaum relevant ist, im größeren Modell aber unter den 10 einflussreichsten Features.
 
 Eine mögliche Erklärung für die überraschend gute Leistung des trainierten Modells ist, dass die relativ geringe Vielfalt, insbesondere im Untersuchungskorpus, einen Teil zu der guten Leistung beigetragen hat.

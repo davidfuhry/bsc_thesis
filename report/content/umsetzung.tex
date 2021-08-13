@@ -5,7 +5,7 @@
 Als Grundlage dieser Arbeit wurde ein Textkorpus aus Artikeln von insgesamt sieben deutschsprachigen, der verschwörungstheoretischen Szene zuzurechnenden Internetangeboten erstellt.
 Die Skripte zum automatischen Abruf der Artikel nutzen das R-Paket \textit{rvest} \parencite{rvest} und extrahieren mittels für jede Seite separat erstellten CSS-Selektoren und XPath-Queries den jeweiligen Artikeltext.
 Während dieses Prozesses wurden auch kleinere Bereinigungen an den Artikeltexten vorgenommen, um wiederkehrende, nicht zum Artikeltext gehörende Elemente wie Werbung oder Spendenaufrufe zu entfernen.
-Die Texte selbst wurden jedoch soweit möglich nicht weiterbearbeitet.
+Die Texte selbst wurden jedoch soweit möglich nicht weiter bearbeitet.
 Weiterhin erfasst wurde zu jedem Artikel das (angegebene) Veröffentlichungsdatum, der Artikeltitel sowie die Rubrik auf der Website, so diese Angabe vorhanden war.
 
 \begin{figure}[h]
@@ -18,10 +18,10 @@ Weiterhin erfasst wurde zu jedem Artikel das (angegebene) Veröffentlichungsdatu
 
 Der so erstellte Korpus umfasst insgesamt 16836 Artikel und deckt beginnend im Jahr 2006 einen Zeitraum von 14 Jahren ab.
 Die zeitliche Verteilung der Artikel im Korpus ist Grafik \ref{article-frequency}
-zu entnehmen,\footnote{Alle Grafiken erstellt mit \textit{ggplot2} \parencite{ggplot2}.}.
-Wie dort ersichtlich ist, steigt beginnend in 2016 die Zahl der Artikel stark an.
-Dies ist zum einen damit zu erklären, dass einzelne der gecrawlten Websites ihre Veröffentlichungsfrequenz zu dieser Zeit erhöht haben, überwiegend ist diese Entwicklung aber darauf zurückzuführen, dass insbesondere das Angebote von \textit{Watergate.tv} erst im Jahr 2016 seinen Betrieb aufgenommen hat und eine hohe Veröffentlichungsfrequenz aufweist.
-Genauere Informationen zu den von den einzelnen Angeboten abgedeckten Zeiträumen sowie zu Artikelzahl und Länge finden sich in Tabelle \ref{corpus-stats}.
+zu entnehmen.\footnote{Alle Grafiken erstellt mit \textit{ggplot2} \parencite{ggplot2}.}
+Wie dort ersichtlich ist, steigt beginnend in 2016 die Menge der Artikel stark an.
+Das ist zum einen damit zu erklären, dass einzelne der gecrawlten Websites ihre Veröffentlichungsfrequenz zu dieser Zeit erhöht haben, überwiegend ist diese Entwicklung aber darauf zurückzuführen, dass das Angebote von \textit{Watergate.tv} erst im Jahr 2016 seinen Betrieb aufgenommen hat und eine hohe Veröffentlichungsfrequenz aufweist.
+Genauere Informationen zu den von den einzelnen Angeboten abgedeckten Zeiträumen, sowie zu Artikelzahl und Länge, finden sich in Tabelle \ref{corpus-stats}.
 
 Dort ist auch ersichtlich, dass sich nicht nur die absolute Zahl der Artikel nach Quelle stark unterscheidet, auch das Veröffentlichungsintervall schwankt je nach Quelle von weniger als einem Artikel/Monat zu über 100.
 Es besteht weiterhin ein negativer Zusammenhang zwischen der durchschnittlichen Artikellänge und dem Veröffentlichungsintervall ($r = -0.72, p = 0.065$).
@@ -50,7 +50,7 @@ Es besteht weiterhin ein negativer Zusammenhang zwischen der durchschnittlichen 
 
 Auch eine inhaltliche Betrachtung zeigt deutliche Unterschiede zwischen den einzelnen Quellen.
 So ist \textit{Alles Schall und Rauch} (\textit{ASuR}) als ältestes vertretenes Angebot auch einer der klassischsten Vertreter der konspirativen Webangebote.
-Die Besucher:innen werden direkt auf der Startseite mit Fragen konfrontiert wie \enquote*{Was geschau wirklich am 11. September?} oder \enquote*{Was passiert tatsächlich mit dem Klima?} \parencite{asur-homepage}.\footnote{Hier ist bereits die von \textcite[][205]{filatkina_2018} beobachtete Konstruktion des offenen Fragen zu erkennen, die die Aufmerksamkeit der Besucher:innen auf sich ziehen soll.}
+Die Besucher:innen werden direkt auf der Startseite mit Fragen konfrontiert wie \enquote*{Was geschau wirklich am 11. September?} oder \enquote*{Was passiert tatsächlich mit dem Klima?} \parencite{asur-homepage}.\footnote{Hier ist bereits die von \textcite[][205]{filatkina_2018} beobachtete Konstruktion der offenen Fragen zu erkennen, die die Aufmerksamkeit der Besucher:innen auf sich ziehen soll.}
 
 Die Seite bedient sich klassischer Verschwörungstheorien und wird im Allgemeinen der Truther Szene zugeordnet \parencite{psiram-asur}.
 Sie hat laut Eigenaussage im Schnitt über 50.000 Zugriffe täglich.\footnote{Der Besucherzähler der Website ist inzwischen nicht mehr funktional, Angabe übernommen aus \textcite{vice-asur}.}
@@ -71,8 +71,7 @@ Die verbleibenden beiden Quellen im Korpus \textit{recentr} und \textit{Watergat
 Beide zeichnet ein eher journalistischer Stil aus, es werden kurze bis mittellange Meldungen veröffentlicht, häufig begleitet von eigenen oder fremden Videos.
 \textit{Recentr} wurde 2006 als deutscher Ableger von \textit{Inforwars.com} gegründet und bedient sich noch heute einem ähnlichen Konzept.
 Es wird massiv Werbung für den eigenen Shop gemacht, in dem diverse Produkte zur Vorbereitung auf apokalyptische Szenarien sowie fragwürdige Nahrungsergänzungsmittel verkauft werden.
-Inhaltlich sticht vor allem heraus, dass sich die Seite (bzw. der Hauptautor Alexander Benesch) z.T. sehr explizit von anderen Teilen der rechten bzw. der verschwörungstheoretischen Szene abgrenzt.
-\footnote{So grenzt sich das Portal in Beiträgen inzwischen auch von \textit{Inforwars} Gründer Alex Jones ab \parencite{recentr-jones} oder spekuliert darüber, ob die Alternative für Deutschland vom britischen Geheimdienst gegründet wurde \parencite{recentr-afd}.}
+Inhaltlich sticht vor allem heraus, dass sich die Seite (bzw. der Hauptautor Alexander Benesch) z.T. sehr explizit von anderen Teilen der rechten bzw. der verschwörungstheoretischen Szene abgrenzt.\footnote{So grenzt sich das Portal in Beiträgen inzwischen auch von \textit{Inforwars} Gründer Alex Jones ab \parencite{recentr-jones} oder spekuliert darüber, ob die Alternative für Deutschland vom britischen Geheimdienst gegründet wurde \parencite{recentr-afd}.}
 So kommt es durchaus vor, dass in einem Artikel zunächst von der \enquote{implausiblen Sichtweise, verschiedenste Regierungen hätten eine Fake-Pandemie orchestriert} \parencite{recentr-population} gesprochen wird, nur um im nächsten Satz zu erklären: 
 
 \begin{quotation}
@@ -91,11 +90,11 @@ Diese zu untersuchen ist allerdings nicht Teil der Fragestellung dieser Arbeit.
 
 Um einen möglichst guten Vergleich zwischen den Texten im Korpus und dem Vergleichskorpus zu ermöglichen, war es das Ziel Medien zu finden die in Form und inhaltlicher Ausrichtung dem Korpus möglichst ähnlich sind, ohne aber dessen verschwörungstheoretische Aspekte zu teilen.
 Da insbesondere die letzten beiden besprochenen Angebote sich inhaltlich sehr an journalistische  Medien anlehnen, lag es nah ebensolche heranzuziehen.
-Aus Gründen der Vollständigkeit (die Angebote sollten möglichst während des kompletten vom Korpus abgedeckten Zeitraums publiziert haben) sowie der Zugänglichkeit, wurden die Angebote von \textit{Spiegel Online} sowie der \textit{Frankfurter Rundschau} ausgewählt.
+Aus Gründen der Vollständigkeit (die Angebote sollten möglichst während des kompletten vom Korpus abgedeckten Zeitraums publiziert haben) sowie der Zugänglichkeit, wurden die Angebote von \textit{Spiegel Online} und der \textit{Frankfurter Rundschau} ausgewählt.
 Es wurde für beide Onlineangebote zunächst ein Index aller Artikel, die in dem vom Korpus abgedeckten Zeitraum veröffentlicht wurden, erstellt und aus diesem zufällig eine Auswahl von 10000 Artikeln pro Anbieter gezogen.
 
 Da die restlichen im Korpus enthaltenen Seiten alle mehr oder weniger in der Form eines Blogs gestaltet sind, sollten Angebote vergleichbarer Form herangezogen werden.
-Um auch dem in der Literatur häufig genannten wissenschaftlichen Stil von verschwörungstheoretischen Texten Rechnung zu tragen, wurde eine Reihe von Wissenschaftsblogs als zweite Komponente des Vergleichskorpus gewählt.
+Um auch dem, in der Literatur häufig genannten, wissenschaftlichen Stil von verschwörungstheoretischen Texten Rechnung zu tragen, wurde eine Reihe von Wissenschaftsblogs als zweite Komponente des Vergleichskorpus gewählt.
 Dafür wurden von den beiden Platformen \textit{scienceblogs} und \textit{scilogs},\footnote{Beide Platformen sind Anbieter bei denen eine Vielzahl verschiedener Blogs zu finden sind.} ähnlich den journalistischen Angeboten, aus dem gesamten Index der Einträge eine Auswahl von jeweils 10000 Artikeln ausgewählt.
 Genauere Kennwerte zum Vergleichskorpus sind Tabelle \ref{comcorpus-stats} zu entnehmen.\footnote{Die geringere Artikelzahl ist auf später durchgeführte Bereinigungen zurückzuführen.}
 
@@ -146,13 +145,13 @@ Eine genauere Betrachtung der Verwendung von Fremdbelegen von denen etwa \textci
     \item Der Anteil von zitiertem Text am gesamten Artikeltext
 \end{enumerate}
 
-Die Menge an scare quotes wird ebenfalls erfasst, wobei ein scare quote für diese Arbeit definiert wird als ein Zitat, in dem keine Leerzeichen (oder andere Formen von whitespaces) enthalten sind.
+Die Menge an Scare Quotes wird ebenfalls erfasst, wobei ein Scare Quote für diese Arbeit definiert wird als ein Zitat, in dem keine Leerzeichen (oder andere Formen von Whitespaces) enthalten sind.
 
-Die Menge der Fragen, wie sie etwa \textcite[205]{filatkina_2018} als Merkmal von verschwörungstheoretischen Texten feststellt, wird durch ein simples Zählen der im Text vorkommenden Fragezeichen abgebildet.
-Ähnlich lässt sich auch die Annahme über die Häufung von Zahlenangaben wie sie sich bei \textcite[234]{schafer_2018} findet, durch einfaches Zählen von Zahlengruppen operationalisieren.
+Die Anzahl der Fragen, wie sie etwa \textcite[205]{filatkina_2018} als Merkmal von verschwörungstheoretischen Texten feststellt, wird durch ein simples Zählen der im Text vorkommenden Fragezeichen abgebildet.
+Ähnlich lässt sich auch die Annahme über die Häufung von Zahlenangaben, wie sie sich bei \textcite[234]{schafer_2018} findet, durch einfaches Zählen von Zahlengruppen operationalisieren.
 Um die bei \textcite[149]{stumpf_2019} gemachte Beobachtung der häufigen Verwendung von Negationswörtern abzubilden, wurde händisch eine Liste von 15 Negationswörtern erstellt und deren Häufigkeit in den Texten gemessen.
 
-Die Multimedialität und Verknüpftheit von verschwörungstheoretischen Artikeln wie sie \textcite[10]{soukup_2008} anspricht, soll mit einer Reihe von Informationen die aus den dem Korpus zugrunde liegenden HTML Dateien extrahiert wurden abgebildet werden.
+Die Multimedialität und Verknüpftheit von verschwörungstheoretischen Artikeln wie sie \textcite[10]{soukup_2008} anspricht, soll mit einer Reihe von Informationen die aus den dem Korpus zugrunde liegenden HTML-Dateien extrahiert wurden abgebildet werden.
 Um die Multimedialität zu erfassen, wurde die Anzahl der eingebundenen Bilder, Tweets, Youtube-Videos sowie sonstiger eingebetteter Elemente im Artikel gezählt.
 Für eine Messung der Verknüpftheit wurde die Anzahl von in den Artikeln enthaltenen Links, aufgeteilt nach internen und externen Zielen, erfasst.
 Ebenso wurde als stilistisches Merkmal die Menge an fettgedruckten und kursiven Text ausgewertet.
@@ -183,7 +182,7 @@ Um weitere Features aus dem Bereich der Textklassifikation zu nutzen, wurde der 
 Es wurden anschließend die Anzahl jedes Part-of-Speech Tags, die Zahl der Sonderzeichen sowie der Anteil an großgeschriebenen Text als Feature übernommen.
 Ebenso wurde die Wortdichte für jeden Text bestimmt, also die Anzahl an Wörtern im Verhältnis zur Textlänge.
 
-Zur Ermittlung von Wortfrequenzen wurden zunächst Stoppwörter aus dem Korpus entfernt\footnote{Zum Einsatz kam die Stoppwort Liste aus dem \textit{tm} Paket \parencite[][]{r-tm}}, Wörter auf ihre Lemmata reduziert, einige Sonderfälle aussortiert\footnote{So wurde beispielsweise das Wort dpa nicht übernommen, da es praktisch exklusiv in Artikeln der Frankfurter Rundschau und von Spiegel Online vorkommt.} und anschließend die 400 häufigsten Wörter als Features übernommen.\footnote{Es ist durchaus üblich mehr Wörter als Features zu übernehmen \parencite[vgl.][68]{feldman_sanger_2006}, da dies aber die Dimensionalität der Daten und damit die Komplexität der Klassifizierung deutlich erhöhen würde und die Auswahl von 400 Wörtern bereits zufriedenstellende Ergebnisse liefert wurde hier darauf verzichtet.}
+Zur Ermittlung von Wortfrequenzen wurden zunächst Stoppwörter aus dem Korpus entfernt,\footnote{Zum Einsatz kam die Stoppwort Liste aus dem \textit{tm} Paket \parencite[][]{r-tm}.} Wörter auf ihre Lemmata reduziert, einige Sonderfälle aussortiert\footnote{So wurde beispielsweise das Wort dpa nicht übernommen, da es praktisch exklusiv in Artikeln der Frankfurter Rundschau und von Spiegel Online vorkommt.} und anschließend die 400 häufigsten Wörter als Features übernommen.\footnote{Es ist durchaus üblich mehr Wörter als Features zu übernehmen \parencite[vgl.][68]{feldman_sanger_2006}, da dies aber die Dimensionalität der Daten und damit die Komplexität der Klassifizierung deutlich erhöhen würde und die Auswahl von 400 Wörtern bereits zufriedenstellende Ergebnisse liefert, wurde hier darauf verzichtet.}
 Alle Features abgesehen von den sowieso als \textit{tf-idf} oder als relative Häufigkeit vorliegenden wurden mit der Textlänge skaliert.
 
 \subsection{Modelerstellung}
@@ -235,8 +234,8 @@ Auch ist ersichtlich, dass das komplexere \textit{LightGBM} Modell eine in allen
 \end{table}
 
 Im Weiteren wurde ein Modell mit allen vorhandenen Features erstellt.
-Hierfür wurde ebenfalls zunächst als Baseline Entscheidungsbaum trainiert.
-Dieser erreichte eine Präzision von 87.7\% und konnte damit den Entscheidungsbaum, der auf dem kleineren Korpus trainiert wurde in Genauigkeit deutlich übertreffen.
+Hierfür wurde ebenfalls zunächst als Baseline ein Entscheidungsbaum trainiert.
+Dieser erreichte eine Präzision von 87.7\% und konnte damit den Entscheidungsbaum der auf dem kleineren Korpus trainiert wurde in Genauigkeit deutlich übertreffen.
 Hervorzuheben ist vor allem die verhältnismäßig geringe Sensitivität.
 
 \begin{figure}[ht]
@@ -251,7 +250,7 @@ Getestete Werte waren dabei für die Lernrate 0.01, 0.05, 0.10, 0.20 und für di
 Das beste Ergebnis wurde mit einer Lernrate von 0.05 und einer Blätterzahl von 50 erzielt.
 Mit diesen Werten wurde erneut die optimale Iterationstiefe mittels Kreuzvalidierung bestimmt.
 
-Das mit diesen Parametern erstellte, finale Modell wurde schließlich mittels einer 10-Fold Kreuzvalidierung auf den gesamten Datensatz validiert und erreichte insgesamt eine Präzision von 98.14\%.
+Das mit diesen Parametern erstellte, finale Modell wurde schließlich mittels einer 10-Fold Kreuzvalidierung auf den gesamten Datensatz validiert und erreichte insgesamt eine Präzision von 97.84\%.
 Die Confusion-Matrix der Kreuzvalidierung ist in Grafik \ref{confusion-table} zu sehen.
 
 \footnotetext{10-Fold Kreuzvalidiert}
